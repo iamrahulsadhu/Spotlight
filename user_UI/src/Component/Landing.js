@@ -14,16 +14,35 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Di from '../assets/log1.png';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 const navItems = ['Explore', 'Login', 'Signup'];
 
 const Landing = () => {
+    const nav = useNavigate();
+
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const handleClick = (item) => {
+        switch (item) {
+            case 'Explore':
+                nav("/");
+                break;
+            case 'Login':
+                nav('/login');
+                break;
+            case 'Signup':
+                nav('/Signup');
+                break;
+            default:
+                console.log('wrong choice');
+        }
+    };
+
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -34,7 +53,7 @@ const Landing = () => {
             <List>
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: 'center' }}>
+                        <ListItemButton sx={{ textAlign: 'center' }} onClick={() => handleClick(item)}>
                             <ListItemText primary={item} />
                         </ListItemButton>
                     </ListItem>
@@ -63,7 +82,7 @@ const Landing = () => {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block',md:'flex',xl:'flex'} }}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff', textTransform: 'lowercase' }}>
+                            <Button key={item} sx={{ color: '#fff', textTransform: 'lowercase' }} onClick={() => handleClick(item)}>
                                 {item}
                             </Button>
                         ))}
