@@ -2,28 +2,38 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import '../../CSS/signup.css' // Import your CSS file
-
+import axios from 'axios';
 const Signup = () => {
   return (
     <div className="wrapper">
       <Formik
         initialValues={{
           fullName: '',
-          username: '',
+          userName: '',
           email: '',
           password: '',
         }}
         validationSchema={Yup.object({
           fullName: Yup.string().required('Full Name is required'),
-          username: Yup.string().required('Username is required'),
+          userName: Yup.string().required('Username is required'),
           email: Yup.string().email('Invalid email address').required('Email is required'),
           password: Yup.string().required('Password is required'),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async(values, { setSubmitting }) => {
+          try{
+            const{fullName,userName,email,password}=values;
+            await axios.post("http://localhost:4000/signup",{
+              fullName,userName,email,password
+            })
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
+        }
+        catch(err)
+        {
+          console.log(err.message);
+        }
         }}
       >
         <Form>
@@ -33,8 +43,8 @@ const Signup = () => {
             <ErrorMessage name="fullName" component="div" className="error" />
           </div>
           <div className="input">
-            <Field type="text" name="username" placeholder="Username" />
-            <ErrorMessage name="username" component="div" className="error" />
+            <Field type="text" name="userName" placeholder="Username" />
+            <ErrorMessage name="userName" component="div" className="error" />
           </div>
           <div className="input">
             <Field type="text" name="email" placeholder="Email" />
