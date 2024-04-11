@@ -1,9 +1,11 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import '../../CSS/signup.css' // Import your CSS file
+import '../../CSS/signup.css'; // Import your CSS file
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Change to useNavigate
 const Signup = () => {
+  const navigate = useNavigate(); // Change to useNavigate
   return (
     <div className="wrapper">
       <Formik
@@ -19,21 +21,20 @@ const Signup = () => {
           email: Yup.string().email('Invalid email address').required('Email is required'),
           password: Yup.string().required('Password is required'),
         })}
-        onSubmit={async(values, { setSubmitting }) => {
-          try{
-            const{fullName,userName,email,password}=values;
-            await axios.post("http://localhost:4000/signup",{
-              fullName,userName,email,password
-            })
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }
-        catch(err)
-        {
-          console.log(err.message);
-        }
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            const { fullName, userName, email, password } = values;
+            await axios.post("http://localhost:4000/signup", {
+              fullName, userName, email, password
+            });
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+              navigate("/login"); // Use navigate to navigate
+            }, 400);
+          } catch (err) {
+            console.log(err.message);
+          }
         }}
       >
         <Form>
