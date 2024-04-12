@@ -5,7 +5,8 @@
     font-family: sans-serif;
 }
 
-body {
+.containerMain {
+    min-width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,3 +142,5 @@ button {
     color: red;
     font-size: smaller;
 }
+
+

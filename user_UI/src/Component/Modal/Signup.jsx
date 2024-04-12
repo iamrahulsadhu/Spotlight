@@ -3,7 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import '../../CSS/signup.css' // Import your CSS file
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 const Signup = () => {
+  const navigate=useNavigate();
   return (
     <div className="wrapper">
       <Formik
@@ -29,6 +31,7 @@ const Signup = () => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
+          navigate("/login");
         }
         catch(err)
         {
