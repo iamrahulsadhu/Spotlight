@@ -7,7 +7,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
+.signup{
+  min-width:100vw;
     display: flex;
     justify-content: center;
     align-items: center;
