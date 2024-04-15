@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Di from '../assets/log1.png';
 import { useNavigate } from 'react-router-dom';
-
+import '../App.css'
 const drawerWidth = 240;
 const navItems = ['Explore', 'Login', 'Signup'];
 
@@ -45,7 +45,7 @@ const Landing = () => {
 
 
     const drawer = (
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+        <Box  onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2 }}>
                 MUI
             </Typography>
@@ -65,7 +65,7 @@ const Landing = () => {
     return (
         <Box sx={{ display: 'flex', backgroundColor: '#040d3d', minHeight: '90vh' }}>
             <CssBaseline />
-            <AppBar component="nav" position="fixed" sx={{ background: '#040d3d' }}>
+            <AppBar className='head' component="nav" position="fixed" sx={{ background: '#040d3d' }}>
                 <Toolbar sx={{ marginRight:10 }}>
                     <IconButton
                         color="inherit"

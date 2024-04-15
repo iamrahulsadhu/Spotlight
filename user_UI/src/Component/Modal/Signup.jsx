@@ -1,11 +1,13 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import '../../CSS/signup.css' // Import your CSS file
+import '../../CSS/signup.css'; // Import your CSS file
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 const Signup = () => {
+  const navigate=useNavigate();
   return (
-    <div className="wrapper">
+    <div className="wrapper signup">
       <Formik
         initialValues={{
           fullName: '',
@@ -19,7 +21,7 @@ const Signup = () => {
           email: Yup.string().email('Invalid email address').required('Email is required'),
           password: Yup.string().required('Password is required'),
         })}
-        onSubmit={async(values, { setSubmitting }) => {
+        onSubmit={async(values,{setSubmitting}) => {
           try{
             const{fullName,userName,email,password}=values;
             await axios.post("http://localhost:4000/signup",{
@@ -29,13 +31,13 @@ const Signup = () => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
+          navigate("/login");
         }
         catch(err)
         {
           console.log(err.message);
         }
-        }}
-      >
+        }}>
         <Form>
           <h1>Sign up</h1>
           <div className="input">

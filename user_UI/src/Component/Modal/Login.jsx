@@ -32,6 +32,7 @@ function Login() {
     });
 
     return (
+        <div className="containerMain">
         <main>
             <header>
                 <h4>Login</h4>
@@ -89,6 +90,7 @@ function Login() {
                 </form>
             </header>
         </main>
+        </div>
     );
 }
 
