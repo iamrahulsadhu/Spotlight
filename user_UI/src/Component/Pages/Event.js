@@ -420,16 +420,22 @@ const handleCategorySelect = (category) => {
           </CategoryButton>
         </CategoryFilter>
         <Grid container spacing={3}>
-  {data && data.map((e) => (
-    <React.Fragment key={e.eventName}>
-      <ContentItem
-        title={e.eventName}
-        image={Events}
-        description={e.details}
-        category={e.category}
-      />
-    </React.Fragment>
-  ))}
+  {data.length > 0 ? (
+    data.map((e) => (
+      <React.Fragment key={e.eventName}>
+        <ContentItem
+          title={e.eventName}
+          image={Events}
+          description={e.details}
+          category={e.category}
+        />
+      </React.Fragment>
+    ))
+  ) : (
+    <Typography variant="body1" align="center">
+      No events found in this category.
+    </Typography>
+  )}
 </Grid>
               {/* <ContentItem
                 title="Content 2 for All"
