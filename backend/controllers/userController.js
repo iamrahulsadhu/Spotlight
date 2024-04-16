@@ -1,5 +1,6 @@
 const user=require("../modelSchema/userDetails");
 const bcrypt=require('bcryptjs')
+const jwt=require('jsonwebtoken');
 class User{
 
     static userSignUp=async(req,res)=>{
@@ -24,7 +25,6 @@ class User{
     static userLogIn=async(req,res)=>{
         const { email, password } = req.body;
         try {
-          console.log("nsiu");
           // if (req.session.userId) {
           //   return res.status(400).send("User is already logged in");
           // }
@@ -36,8 +36,12 @@ class User{
           if (!isMatching) {
             return res.status(400).send({ err: "Invalid username or password" });
           }
+          jwt.sign({existingUser}, 'hello world', { expiresIn: '1h' },(err, token) => {
+            if(err) { console.log(err) }    
+            res.send(token);
+        });
           console.log(existingUser);
-          res.status(200).send({ user: existingUser });
+          // res.status(200).send({ user: existingUser });
         } catch (err) {
           res.status(500).send({ err: err.message });
         }

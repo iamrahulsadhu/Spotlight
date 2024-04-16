@@ -1,7 +1,7 @@
 const event=require("../modelSchema/eventDetails");
-
+const jwt=require('jsonwebtoken')
 class Event{
-
+//Check to make sure header is not undefined, if so, return Forbidden (403)
     static addEvent=async(req,res)=>{
         const {eventName,timing,details}=req.body;
         try {

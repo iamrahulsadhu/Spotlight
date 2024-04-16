@@ -18,11 +18,17 @@ function Login() {
             // Handle form submission here
 
             try{
+                const headers = {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Example of an authorization header
+                    'Content-Type': 'application/json', // Example of a content type header
+                    // Add more headers as needed
+                  };
                 const{email,password}=values;
-                await axios.post("http://localhost:4000/login",{
+                let token=await axios.post("http://localhost:4000/login",{
                   email,password
-                })
-            console.log('Form values:', values);
+                },{headers})
+                localStorage.setItem("token",token.data)
+            console.log(token);
         }
         catch(err)
         {

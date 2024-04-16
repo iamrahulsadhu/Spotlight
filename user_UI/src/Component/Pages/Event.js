@@ -312,7 +312,12 @@ useEffect(() => {
 }, [])
 const fetchEvents=async()=>{
   try {
-    dbData=await axios.get("http://localhost:4000/allevent")
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`, // Example of an authorization header
+      'Content-Type': 'application/json', // Example of a content type header
+      // Add more headers as needed
+    };
+    dbData=await axios.get("http://localhost:4000/allevent",{headers})
     setData(dbData.data.data);
     setFilterData(dbData.data.data)
   } catch (err) {
