@@ -23,6 +23,7 @@ import Thrill from '../../assets/thrillerevents.jpg'
 import Action from '../../assets/actionevents.jpg'
 import Sport from '../../assets/sportsevents.png'
 import Comedy from '../../assets/comedyevents.jpg'
+import { useNavigate } from 'react-router-dom';
 import { useEffect,useState} from 'react';
 import axios from 'axios';
 const Search = styled('div')(({ theme }) => ({
@@ -96,9 +97,12 @@ const CategoryButton = styled(Typography)(({ theme, selected }) => ({
   },
 }));
 
-const ContentItem = ({ title, image, description,date }) => {
+const ContentItem = ({ title, image, description,date,id}) => {
+  const navigate=useNavigate();
   const [isHovered, setIsHovered] = React.useState(false);
-
+  const handleClick=()=>{
+    navigate(`/event/${id}`)
+  }
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -110,6 +114,7 @@ const ContentItem = ({ title, image, description,date }) => {
   return (
     <Grid item xs={12} md={4}>
       <Paper
+        onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         sx={{
@@ -432,6 +437,7 @@ const handleCategorySelect = (category) => {
         image={Events}
         description={e.details}
         category={e.category}
+        id={e._id}
       />
     </React.Fragment>
   ))}

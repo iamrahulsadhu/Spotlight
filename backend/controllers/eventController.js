@@ -20,7 +20,7 @@ class Event{
             res.status(400).send({err:err.message})
         }
     }
-    static manyevent=async(req,res)=>{
+    static manyevent=async(req,res)=>{ 
         try {
             const data=await event.create([
                 {
