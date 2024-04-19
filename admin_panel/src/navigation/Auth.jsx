@@ -11,11 +11,13 @@ import Layout from "../components/Layout";
 import Home from "../components/Home";
 import Update from "../components/Update";
 import Insert from "../components/Insert";
+import Request from "../components/Request";
 import axios from "axios";
 import Login from "../components/Login";
 // import Login from "../components/Login.";
 const Auth = () => {
   const [data, setData] = useState([]);
+  // const [requestData,setRequestData] = useState([]);
   const [updateData, setUpdateData] = useState({});
   const [first, setfirst] = useState(true);
   useEffect(() => {
@@ -69,7 +71,7 @@ const Auth = () => {
   };
   const table = async () => {
     await axios
-      .get("http://localhost:5000/admin/gettrains")
+      .get("http://localhost:4000/admin/gettrains")
       .then((res) => {
         setData(() => res);
       })
@@ -77,6 +79,19 @@ const Auth = () => {
         console.log(err.message);
       });
   };
+  let requestData;
+  const requests=async()=>{
+    await axios
+    .get("http://localhost:4000/request")
+    .then((res) => {
+      console.log(res.data.data);
+      requestData=res.data.data;
+      console.log(requestData);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  }
   const updateTrain = (id) => {
     try {
       // const updateData=data.data.filter((e)=>{
@@ -161,6 +176,12 @@ console.log(res);
             path="/admin/table"
             element={
               <Home table={table} data={data} updateTrain={updateTrain} deleteTrain={deleteTrain}/>
+            }
+          />
+           <Route
+            path="/admin/requests"
+            element={
+              <Request requests={requests} requestData={requestData}/>
             }
           />
           <Route path="/admin/insert" element={<Insert insertData={insertData} />} />

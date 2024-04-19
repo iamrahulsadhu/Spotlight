@@ -15,7 +15,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/events" element={<Event/>} />
-          <Route path="/event/:id" element={<EventDetails/>} />
+          <Route path="/events/event/:id" element={<EventDetails/>} />
+          {/* <Route path="/EventDetails" element={<EventDetails/>} /> */}
           </Routes>
       {/* </Sidebar> */}
     </BrowserRouter>

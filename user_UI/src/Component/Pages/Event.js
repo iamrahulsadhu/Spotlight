@@ -101,7 +101,7 @@ const ContentItem = ({ title, image, description,date,id}) => {
   const navigate=useNavigate();
   const [isHovered, setIsHovered] = React.useState(false);
   const handleClick=()=>{
-    navigate(`/event/${id}`)
+    navigate(`/events/event/${id}`)
   }
   const handleMouseEnter = () => {
     setIsHovered(true);
