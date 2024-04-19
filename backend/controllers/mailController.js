@@ -5,12 +5,12 @@ static mail=async(req,res)=>{
 const transporter = nodemailer.createTransport({port: 465,
 host: "smtp.gmail.com",
 auth: {
-user: 'sumanjana278@gmail.com',
-pass: 'suman278',},
+user: 'spotlightmailer1234@gmail.com',
+pass: 'Spotlight@1234',},
  secure: true,
  });
 const mailData = {
-from: 'sumanjana278@gmail.com',
+from: 'spotlightmailer1234@gmail.com',
 to: 'bwubca21211@brainwareuniversity.ac.in',
 subject: 'Sending Email using Node.js',text: 'That was easy!',
 html: '<b>Hey there! </b><br> This is our first message sent with Nodemailer<br/>',

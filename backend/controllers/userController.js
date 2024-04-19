@@ -1,4 +1,5 @@
 const user=require("../modelSchema/userDetails");
+const admin=require("../modelSchema/adminDetails");
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken');
 class User{
@@ -8,7 +9,7 @@ class User{
         const {fullName,userName,email,password}=req.body;
         console.log(fullName,userName);
         const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync("1234", salt);
+      const hash = bcrypt.hashSync(password, salt);
         const data=await user.create({
             fullName,userName,email,password:hash
         })

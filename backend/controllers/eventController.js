@@ -1,11 +1,36 @@
 const event=require("../modelSchema/eventDetails");
+const request=require("../modelSchema/request");
+const admin=require("../modelSchema/adminDetails");
 const jwt=require('jsonwebtoken')
+const bcrypt=require("bcryptjs");
 class Event{
 //Check to make sure header is not undefined, if so, return Forbidden (403)
+static adminSignIn=async(req,res)=>{
+  try{
+  // const {fullName,userName,email,password}=req.body;
+  // console.log(fullName,userName);
+  const salt = bcrypt.genSaltSync(10);
+const hash = bcrypt.hashSync("1234", salt);
+  const data=await admin.create({
+      userName:"Admin",password:hash
+  })
+  res.status(200).send({data:data});
+}
+catch(err)
+{
+  console.log("error");
+  console.log(err.message);
+  res.status(400).send({err:err.message});
+}
+}
     static addEvent=async(req,res)=>{
         const {eventName,timing,details}=req.body;
         try {
-            const data=await event.create({eventName,timing,details});
+            const data=await request.create({eventName,timing,details});
+            // admin.requests.push(data._id);
+            await admin.updateOne({userName:"Admin"},
+              { $push: { requests: data._id } })
+          //  await admin.save();
             res.status(200).send({data})
         } catch (err) {
             res.status(400).send({err:err.message})

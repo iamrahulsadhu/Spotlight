@@ -430,17 +430,6 @@ const handleCategorySelect = (category) => {
           </CategoryButton>
         </CategoryFilter>
         <Grid container spacing={3}>
-  {data && data.map((e) => (
-    <React.Fragment key={e.eventName}>
-      <ContentItem
-        title={e.eventName}
-        image={Events}
-        description={e.details}
-        category={e.category}
-        id={e._id}
-      />
-    </React.Fragment>
-  ))}
   {data.length > 0 ? (
     data.map((e) => (
       <React.Fragment key={e.eventName}>
@@ -449,6 +438,7 @@ const handleCategorySelect = (category) => {
           image={Events}
           description={e.details}
           category={e.category}
+          id={e._id}
         />
       </React.Fragment>
     ))

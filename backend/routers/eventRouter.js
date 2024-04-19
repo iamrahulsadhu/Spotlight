@@ -29,6 +29,7 @@ const router=express.Router();
         });
       }
 router.post("/eventadd",event.addEvent);
+router.post("/signIn",event.adminSignIn);
 router.post("/manyeventadd",event.manyevent)
 router.get("/allevent",event.events);
 module.exports=router;
