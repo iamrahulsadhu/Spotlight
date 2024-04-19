@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,14 +17,19 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Events from '../../assets/events.jpg'
-import Music from '../../assets/musicevent.jpg'
-import Thrill from '../../assets/thrillerevents.jpg'
-import Action from '../../assets/actionevents.jpg'
-import Sport from '../../assets/sportsevents.png'
-import Comedy from '../../assets/comedyevents.jpg'
-import { useEffect,useState} from 'react';
-import axios from 'axios';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom'; // Import Link
+import { useNavigate } from 'react-router-dom';
+import { styled, alpha } from '@mui/material/styles';
+
+// Import event images
+import Events from '../../assets/events.jpg';
+import Music from '../../assets/musicevent.jpg';
+import Thrill from '../../assets/thrillerevents.jpg';
+import Action from '../../assets/actionevents.jpg';
+import Sport from '../../assets/sportsevents.png';
+import Comedy from '../../assets/comedyevents.jpg';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -40,6 +45,7 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -54,7 +60,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -80,7 +85,7 @@ const CategoryButton = styled(Typography)(({ theme, selected }) => ({
   borderRadius: theme.shape.borderRadius,
   cursor: 'pointer',
   transition: 'background-color 0.3s ease',
-  position: 'relative', // Required for positioning the line
+  position: 'relative',
   '&:hover': {
     backgroundColor: alpha(theme.palette.primary.main, 0.1),
   },
@@ -90,13 +95,13 @@ const CategoryButton = styled(Typography)(({ theme, selected }) => ({
     left: 0,
     bottom: 0,
     width: '100%',
-    height: selected ? 2 : 0, // Add line height only if selected
+    height: selected ? 2 : 0,
     backgroundColor: theme.palette.primary.main,
     transition: 'height 0.3s ease',
   },
 }));
 
-const ContentItem = ({ title, image, description,date }) => {
+const ContentItem = ({ title, image, description, date }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   const handleMouseEnter = () => {
@@ -109,24 +114,27 @@ const ContentItem = ({ title, image, description,date }) => {
 
   return (
     <Grid item xs={12} md={4}>
-      <Paper
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        sx={{
-          transition: 'transform 0.3s ease',
-          transform: isHovered ? 'scale(1.05)' : 'scale(1)', // Increase scale on hover
-        }}
-      >
-        <Content>
-          <Typography variant="h6">{title}</Typography>
-          <img src={image} alt={title} style={{ width: '100%', height: 'auto', marginBottom: '1rem' }} />
-          <Typography>{description}</Typography>
-        </Content>
-      </Paper>
+      <Link to="/EventDetails"> {/* Wrap with Link component */}
+        <Paper
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          sx={{
+            transition: 'transform 0.3s ease',
+            transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+            backgroundColor: '#ffffff',
+            height: '100%'
+          }}
+        >
+          <Content>
+            <Typography variant="h6">{title}</Typography>
+            <img src={image} alt={title} style={{ width: '100%', height: 'auto', marginBottom: '1rem' }} />
+            <Typography>{description}</Typography>
+          </Content>
+        </Paper>
+      </Link>
     </Grid>
   );
 };
-
 
 function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -227,7 +235,7 @@ function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{backgroundColor:'black'}}>
+      <AppBar position="static" sx={{ backgroundColor: 'black' }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -304,72 +312,35 @@ function PrimarySearchAppBar() {
 }
 
 export default function App() {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
-let dbData;
-useEffect(() => {
-  fetchEvents();
-}, [])
-const fetchEvents=async()=>{
-  try {
-    dbData=await axios.get("http://localhost:4000/allevent")
-    setData(dbData.data.data);
-    setFilterData(dbData.data.data)
-  } catch (err) {
-    console.log(err.message);
-  }
-}
-console.log(data);
-console.log(dbData);
-const [selectedCategory, setSelectedCategory] = React.useState('all');
-const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-  switch (category) {
-    case 'all':{
-    setData(filterData);
-    break;
+  const [displayCount, setDisplayCount] = useState(6);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const dbData = await axios.get("http://localhost:4000/allevent");
+      setData(dbData.data.data);
+      setFilterData(dbData.data.data);
+    } catch (err) {
+      console.log(err.message);
     }
-    case 'music':{
-     let filter=filterData.filter((e)=>{
-     return e.category=='music';
-     })
-    setData(filter)
-      break;
-    }
-    case 'action':{
-      let filter=filterData.filter((e)=>{
-      return e.category=='action';
-      })
-     setData(filter)
-       break;
-     }
-     case 'sports':{
-      let filter=filterData.filter((e)=>{
-      return e.category=='sports';
-      })
-     setData(filter)
-       break;
-     }
-     case 'comedy':{
-      let filter=filterData.filter((e)=>{
-      return e.category=='comedy';
-      })
-     setData(filter)
-       break;
-     }
-     case 'thriller':{
-      let filter=filterData.filter((e)=>{
-      return e.category=='thriller';
-      })
-      console.log(filter);
-     setData(filter)
-       break;
-     }
-    default:
-      break;
-  }
-    // Handle category selection logic here, like filtering content
   };
+
+  const handleSeeMore = () => {
+    setDisplayCount(prevCount => prevCount + 6);
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredData = selectedCategory === 'all' ? data : filterData.filter(event => event.category === selectedCategory);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '30vh' }}>
@@ -420,130 +391,27 @@ const handleCategorySelect = (category) => {
           </CategoryButton>
         </CategoryFilter>
         <Grid container spacing={3}>
-  {data.length > 0 ? (
-    data.map((e) => (
-      <React.Fragment key={e.eventName}>
-        <ContentItem
-          title={e.eventName}
-          image={Events}
-          description={e.details}
-          category={e.category}
-        />
-      </React.Fragment>
-    ))
-  ) : (
-    <Typography variant="body1" align="center">
-      No events found in this category.
-    </Typography>
-  )}
-</Grid>
-              {/* <ContentItem
-                title="Content 2 for All"
+          {filteredData.slice(0, displayCount).map((event) => (
+            <React.Fragment key={event.eventName}>
+              <ContentItem
+                title={event.eventName}
                 image={Events}
-                description="Description for Content 2"
+                description={event.details}
+                category={event.category}
               />
-              <ContentItem
-                title="Content 3 for All"
-                image={Events}
-                description="Description for Content 3"
-              /> */}
-              {/* Add more ContentItems as needed */}
-        
-          {/* {selectedCategory === 'Music' && (
-            <>
-              <ContentItem
-                title="Music Content 1"
-                image={Music}
-                description="Description for Music Content 1"
-              />
-              <ContentItem
-                title="Music Content 2"
-                image={Music}
-                description="Description for Music Content 2"
-              />
-              <ContentItem
-                title="Music Content 3"
-                image={Music}
-                description="Description for Music Content 3"
-              />
-          )} */}
-          {/* {selectedCategory === 'Action' && (
-            <>
-              <ContentItem
-                title="Action Content 1"
-                image={Action}
-                description="Description for Action Content 1"
-              />
-               <ContentItem
-                title="Action Content 2"
-                image={Action}
-                description="Description for Action Content 2"
-                
-              />
-               <ContentItem
-                title="Action Content 3"
-                image={Action}
-                description="Description for Action Content 3"
-              />
-            </>
-          )}
-          {selectedCategory === 'Sports' && (
-            <>
-              <ContentItem
-                title="Sports Content 1"
-                image={Sport}
-                description="Description for Sports Content 1"
-              />
-              <ContentItem
-                title="Sports Content 2"
-                image={Sport}
-                description="Description for Sports Content 2"
-              />
-              <ContentItem
-                title="Sports Content 3"
-                image={Sport}
-                description="Description for Sports Content 3"
-              />
-            </>
-          )}
-          {selectedCategory === 'Comedy' && (
-            <>
-              <ContentItem
-                title="Comedy Content 1"
-                image={Comedy}
-                description="Description for Comedy Content 1"
-              />
-               <ContentItem
-                title="Comedy Content 2"
-                image={Comedy}
-                description="Description for Comedy Content 2"
-              />
-               <ContentItem
-                title="Comedy Content 3"
-                image={Comedy}
-                description="Description for Comedy Content 3"
-              />
-            </>
-          )}
-          {selectedCategory === 'Thriller' && (
-            <>
-              <ContentItem
-                title="Thriller Content 1"
-                image={Thrill}
-                description="Description for Thriller Content 1"
-              />
-              <ContentItem
-                title="Thriller Content 2"
-                image={Thrill}
-                description="Description for Thriller Content 2"
-              />
-              <ContentItem
-                title="Thriller Content 3"
-                image={Thrill}
-                description="Description for Thriller Content 3"
-                
-              /> */}
-              {/* Add more ContentItems as needed */}
+            </React.Fragment>
+          ))}
+        </Grid>
+        {filteredData.length > displayCount && (
+          <Box sx={{ textAlign: 'center', marginTop: 3 }}>
+            <Button variant="outlined" onClick={handleSeeMore}>See more</Button>
+          </Box>
+        )}
+        {filteredData.length === 0 && (
+          <Typography variant="body1" align="center">
+            No events found in this category.
+          </Typography>
+        )}
       </Box>
     </Box>
   );
