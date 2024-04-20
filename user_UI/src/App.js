@@ -17,15 +17,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           
           <Route path="/events" element={<Event/>} />
-<<<<<<< HEAD
           <Route path="/events/event/:id" element={<EventDetails/>} />
-          {/* <Route path="/EventDetails" element={<EventDetails/>} /> */}
-=======
-          
-          
-          <Route path="/EventDetails" element={<EventDetails/>} />
-          
->>>>>>> 61d62144fccebeb5719f61acd41e82a5b5d903ce
+          {/* <Route path="/EventDetails" element={<EventDetails/>} /> */}        
+          {/* <Route path="/EventDetails" element={<EventDetails/>} />       */}
           </Routes>
       {/* </Sidebar> */}
     </BrowserRouter>
