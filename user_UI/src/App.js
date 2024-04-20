@@ -17,15 +17,13 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           
           <Route path="/events" element={<Event/>} />
-          
+
           
           <Route path="/EventDetails" element={<EventDetails/>} />
-          
           </Routes>
       {/* </Sidebar> */}
     </BrowserRouter>
 
   )
 }
-
 export default App

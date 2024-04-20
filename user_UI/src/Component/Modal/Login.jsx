@@ -18,11 +18,13 @@ function Login() {
             // Handle form submission here
 
             try{
+               
                 const{email,password}=values;
-                await axios.post("http://localhost:4000/login",{
+                let token=await axios.post("http://localhost:4000/login",{
                   email,password
                 })
-            console.log('Form values:', values);
+                localStorage.setItem("token",token.data)
+            console.log(token);
         }
         catch(err)
         {
