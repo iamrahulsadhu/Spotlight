@@ -17,10 +17,10 @@ const EventDetails = () => {
                     <img src={cc} className="card-img-top" alt="..." />
                     <div className="card-body">
                         <p className="card-text" style={{ textAlign: 'left', fontSize: '30px', borderBottom: '1px solid #808080' }}>About</p>
+                            <p className='card2-text' style={{textAlign:'left'}}>vsdvvdfvlkniyfbojsbvc8yhsbfihbsiybfks ciyb</p>
                     </div>
                     <div className='card-body2' style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginTop: '10px' }}>
                         <div style={{ alignSelf: 'flex-start' }}>
-                            <p className='card2-text'>vsdvvdfvlkniyfbojsbvc8yhsbfihbsiybfks ciyb</p>
                         </div>
                     </div>
                 </div>
