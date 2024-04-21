@@ -13,36 +13,36 @@ import { BsCalendar4Event } from "react-icons/bs";
 import './Sidebar.css'
 import { NavLink } from 'react-router-dom';
 
-import CreateButton from '../Dashboard/Button/CreateButton';
+// import CreateButton from '../Dashboard/Button/CreateButton';
 
 
 
 const routes = [
     {
-        path: "/",
+        path: "/userdashboard/",
         name: "Home",
-        icon: <FaHome />,
-    },
-    {
-        path: "/events",
-        name: "Events",
-        icon: <BsCalendar4Event />,
-    },
-    {
-        path: "/invites",
-        name: "Invites",
-        icon: <IoTicketOutline />,
-    },
-    {
-        path: "/rsvp",
-        name: "Rsvp",
-        icon: <FaUserGroup />,
-    },
-    {
-        path: "/notifications",
-        name: "Notifications",
-        icon: <IoIosNotificationsOutline />,
-    },
+        icon: <FaHome />
+    // },
+    // {
+    //     path: "/events",
+    //     name: "Events",
+    //     icon: <BsCalendar4Event />,
+    // },
+    // {
+    //     path: "/invites",
+    //     name: "Invites",
+    //     icon: <IoTicketOutline />,
+    // },
+    // {
+    //     path: "/rsvp",
+    //     name: "Rsvp",
+    //     icon: <FaUserGroup />,
+    // },
+    // {
+    //     path: "/notifications",
+    //     name: "Notifications",
+    //     icon: <IoIosNotificationsOutline />,
+}
 ];
 
 const Sidebar = ({children}) => {
@@ -96,7 +96,19 @@ const Sidebar = ({children}) => {
             </div>
 
             <section className="routes">
-                {routes.map((route) => (
+            <NavLink
+                        activeClassName="active"
+                        to="/"
+                        key="Home"
+                        className="link"
+                    />
+            <NavLink
+                        activeClassName="active"
+                        to="/invites"
+                        key="Invites"
+                        className="link"
+                    />
+                {/* {routes.map((route) => (
                     <NavLink
                         activeClassName="active"
                         to={route.path}
@@ -117,7 +129,7 @@ const Sidebar = ({children}) => {
                             )}
                         </AnimatePresence>
                     </NavLink>
-                ))}
+                ))} */}
             </section>
         </motion.div>
             
