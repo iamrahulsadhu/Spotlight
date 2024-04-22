@@ -12,38 +12,53 @@ import { IoTicketOutline } from "react-icons/io5";
 import { BsCalendar4Event } from "react-icons/bs";
 import './Sidebar.css'
 import { NavLink } from 'react-router-dom';
+import Create from '../Pages/Create';
 
-import CreateButton from '../Dashboard/Button/CreateButton';
+// import CreateButton from '../Dashboard/Button/CreateButton';
 
 
+
+// const routes = [
+//     {
+//         path: "/",
+//         name: "Home",
+//         icon: <FaHome />,
+//     },
+//     {
+//         path: "/events",
+//         name: "Events",
+//         icon: <BsCalendar4Event />,
+//     },
+//     {
+//         path: "/invites",
+//         name: "Invites",
+//         icon: <IoTicketOutline />,
+//     },
+//     {
+//         path: "/rsvp",
+//         name: "Rsvp",
+//         icon: <FaUserGroup />,
+//     },
+//     {
+//         path: "/notifications",
+//         name: "Notifications",
+//         icon: <IoIosNotificationsOutline />,
+//     },
+//     {
+//         path: "/userdashboard/create",
+//         name: "Create",
+//         icon: <IoIosNotificationsOutline />,
+//     },
+// ];
 
 const routes = [
     {
-        path: "/",
-        name: "Home",
-        icon: <FaHome />,
-    },
-    {
-        path: "/events",
-        name: "Events",
-        icon: <BsCalendar4Event />,
-    },
-    {
-        path: "/invites",
-        name: "Invites",
-        icon: <IoTicketOutline />,
-    },
-    {
-        path: "/rsvp",
-        name: "Rsvp",
-        icon: <FaUserGroup />,
-    },
-    {
-        path: "/notifications",
-        name: "Notifications",
-        icon: <IoIosNotificationsOutline />,
-    },
-];
+      path: '/userdashboard',
+      children: [
+        { path: '/create', component:Create }
+    ]
+    }
+  ];
 
 const Sidebar = ({children}) => {
 

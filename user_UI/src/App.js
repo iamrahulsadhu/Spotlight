@@ -5,6 +5,8 @@ import Login from './Component/Modal/Login'
 import Signup from './Component/Modal/Signup'
 import Event from './Component/Pages/Event'
 import EventDetails from './Component/Pages/EventDetails'
+import Sidebar from './Component/SideBar/Sidebar'
+import Create from './Component/Pages/Create'
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +18,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/events" element={<Event/>} />
           <Route path="/EventDetails" element={<EventDetails/>} />
+          <Route path="/userdashboard" element={<Sidebar/>} >
+            <Route path="/userdashboard/create" element={<Create />} />
+
+            </Route>
           
           </Routes>
       {/* </Sidebar> */}

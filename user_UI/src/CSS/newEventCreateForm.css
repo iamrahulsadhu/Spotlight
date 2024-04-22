@@ -1,0 +1,40 @@
+.form-container {
+    max-width: 28rem;
+    margin: 2rem 20rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid bisque;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-input {
+    appearance: none;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .form-textarea {
+    appearance: none;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .form-button {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+  }
+  
+  .form-button:hover {
+    background-color: orange;
+  }
+  
