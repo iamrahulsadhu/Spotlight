@@ -236,7 +236,7 @@ function PrimarySearchAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: 'black' }}>
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: 'flex-start' }}>
           <IconButton
             size="large"
             edge="start"
