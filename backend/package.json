@@ -6,7 +6,8 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.4",
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.13",
+    "qrcode": "^1.5.3"
   },
   "name": "backend",
   "version": "1.0.0",

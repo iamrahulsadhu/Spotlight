@@ -43,6 +43,15 @@ static events=async(req,res)=>{
             res.status(400).send({err:err.message})
         }
     }
+    static eventDetails=async(req,res)=>{
+      try {
+        const id=req.params.id;
+          const data=await event.findOne({_id:id});
+          res.status(200).send({data})
+      } catch (err) {
+          res.status(400).send({err:err.message})
+      }
+  }
     static requests=async(req,res)=>{
       try {
           const data=await request.find({});

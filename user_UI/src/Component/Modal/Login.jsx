@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import '../../CSS/login.css'
 import axios from 'axios';
-function Login() {
+function Login({login}) {
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -14,23 +14,10 @@ function Login() {
             email: Yup.string().email('Invalid email address').required('Required'),
             password: Yup.string().required('Required')
         }),
-        onSubmit:async(values) => {
+        onSubmit:(values) => {
             // Handle form submission here
-
-            try{
-               
-                const{email,password}=values;
-                let token=await axios.post("http://localhost:4000/login",{
-                  email,password
-                })
-                localStorage.setItem("token",token.data)
-            console.log(token);
+              login(values)
         }
-        catch(err)
-        {
-            console.log(err.message);
-        }
-    }
     });
 
     return (

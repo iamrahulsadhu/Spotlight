@@ -17,6 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import Events from '../../assets/events.jpg'
 import Music from '../../assets/musicevent.jpg'
 import Thrill from '../../assets/thrillerevents.jpg'
@@ -311,10 +312,15 @@ function PrimarySearchAppBar() {
 export default function App() {
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
+  const [displayCount, setDisplayCount] = useState(6);
 let dbData;
 useEffect(() => {
   fetchEvents();
 }, [])
+const handleSeeMore = () => {
+  setDisplayCount(prevCount => prevCount + 6);
+};
+
 const fetchEvents=async()=>{
   try {
     const headers = {
@@ -324,7 +330,7 @@ const fetchEvents=async()=>{
     };
     dbData=await axios.get("http://localhost:4000/allevent",{headers})
     setData(dbData.data.data);
-    setFilterData(dbData.data.data)
+    // setFilterData(dbData.data.data)
   } catch (err) {
     console.log(err.message);
   }
@@ -336,6 +342,7 @@ const handleCategorySelect = (category) => {
     setSelectedCategory(category);
   switch (category) {
     case 'all':{
+     setDisplayCount(6);
     setData(filterData);
     break;
     }
@@ -343,6 +350,7 @@ const handleCategorySelect = (category) => {
      let filter=filterData.filter((e)=>{
      return e.category=='music';
      })
+     setDisplayCount(6);
     setData(filter)
       break;
     }
@@ -350,6 +358,7 @@ const handleCategorySelect = (category) => {
       let filter=filterData.filter((e)=>{
       return e.category=='action';
       })
+     setDisplayCount(6);
      setData(filter)
        break;
      }
@@ -357,6 +366,7 @@ const handleCategorySelect = (category) => {
       let filter=filterData.filter((e)=>{
       return e.category=='sports';
       })
+     setDisplayCount(6);;
      setData(filter)
        break;
      }
@@ -364,6 +374,7 @@ const handleCategorySelect = (category) => {
       let filter=filterData.filter((e)=>{
       return e.category=='comedy';
       })
+     setDisplayCount(6);
      setData(filter)
        break;
      }
@@ -372,6 +383,7 @@ const handleCategorySelect = (category) => {
       return e.category=='thriller';
       })
       console.log(filter);
+     setDisplayCount(6);
      setData(filter)
        break;
      }
@@ -430,8 +442,8 @@ const handleCategorySelect = (category) => {
           </CategoryButton>
         </CategoryFilter>
         <Grid container spacing={3}>
-  {data.length > 0 ? (
-    data.map((e) => (
+  {data.length > 0 && (
+   data.slice(0, displayCount).map((e) => (
       <React.Fragment key={e.eventName}>
         <ContentItem
           title={e.eventName}
@@ -442,13 +454,21 @@ const handleCategorySelect = (category) => {
         />
       </React.Fragment>
     ))
-  ) : (
-    <Typography variant="body1" align="center">
-      No events found in this category.
-    </Typography>
   )}
+  {data.length > displayCount && (
+    <Box sx={{ textAlign: 'center', marginTop: 3 }}>
+      <Button variant="outlined" onClick={handleSeeMore}>See more</Button>
+    </Box>
+  )}
+   {data.length === 0 && (
+          <Typography variant="body1" align="center">
+            No events found in this category.
+          </Typography>
+        )}
+
+  
 </Grid>
-              {/* <ContentItem
+             {/* <ContentItem
                 title="Content 2 for All"
                 image={Events}
                 description="Description for Content 2"

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link,to } from "react-router-dom";
-const Parent = () => {
+const Parent = ({logout}) => {
   return (
     <>
       <div className="col-2 side-nav"> 
@@ -64,7 +64,7 @@ const Parent = () => {
                 </svg>
                 <span className="ms-3">Update</span>
               </li></Link>
-              <Link to="/" className="linkStyle"><li className="btn btn-danger col-12 text-align-justify">
+              <Link to="/" className="linkStyle"><li className="btn btn-danger col-12 text-align-justify"onClick={logout}>
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
