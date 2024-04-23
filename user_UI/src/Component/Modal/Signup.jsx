@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import '../../CSS/signup.css'; // Import your CSS file
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-const Signup = () => {
+const Signup = ({signup}) => {
   const navigate=useNavigate();
   return (
     <div className="wrapper signup">
@@ -22,21 +22,7 @@ const Signup = () => {
           password: Yup.string().required('Password is required'),
         })}
         onSubmit={async(values,{setSubmitting}) => {
-          try{
-            const{fullName,userName,email,password}=values;
-            await axios.post("http://localhost:4000/signup",{
-              fullName,userName,email,password
-            })
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-          navigate("/login");
-        }
-        catch(err)
-        {
-          console.log(err.message);
-        }
+               signup(values,setSubmitting)
         }}>
         <Form>
           <h1>Sign up</h1>

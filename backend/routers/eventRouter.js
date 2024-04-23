@@ -32,5 +32,6 @@ router.post("/eventadd",event.addEvent);
 router.post("/signIn",event.adminSignIn);
 router.post("/manyeventadd",event.manyevent)
 router.get("/allevent",event.events);
+router.get("/eventdetails/:id",event.eventDetails);
 router.get("/request",event.requests);
 module.exports=router;

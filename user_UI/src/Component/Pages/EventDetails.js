@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
+import {useParams} from 'react-router-dom';
 import cc from '../../assets/comedyevents.jpg';
 import EventSeatIcon from '@mui/icons-material/EventSeat';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -9,7 +10,15 @@ import MovieCreationIcon from '@mui/icons-material/MovieCreation';
 import XIcon from '@mui/icons-material/X';
 import '../../CSS/Eventdetails.css';
 
-const EventDetails = () => {
+const EventDetails = ({eventDetail,invite,ticket}) => {
+    const [paramsid, setParamsid] = useState()
+    const {id}=useParams();
+    useEffect(() => {
+        setParamsid(id);
+        eventDetail(id);
+        console.log(id);
+    },[])
+    
     return (
         <div>
             <div className='card-container' style={{ marginTop: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
@@ -63,10 +72,10 @@ const EventDetails = () => {
                                 <MovieCreationIcon style={{ fontSize: '40px' }} />
                                 <p style={{ marginTop: '10px', fontSize: '20px' }}>Free</p>
                                 <XIcon style={{ marginLeft: '45px' }} />
-                                <p>Invite your friends</p>
+                                <p className="invitestyle" onClick={()=>{invite(paramsid)}}>Invite your friends</p>
                             </div>
                             <div>
-                                <button type="button" className="btn btn-danger">RSVP/ Add Ticket</button>
+                                <button type="button" className="btn btn-danger" onClick={ticket}>RSVP/ Add Ticket</button>
                             </div>
                         </div>
                     </div>
