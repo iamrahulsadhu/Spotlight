@@ -35,7 +35,16 @@ function Login() {
 
     return (
         <div className="containerMain">
-        <main>
+        <main style={{
+            width: "300px",
+            padding: "7em 2.5em 2.5em",
+            borderRadius: "10px",
+            border: "2px solid white",
+            backgroundColor: "transparent",
+            backdropFilter: "blur(25px)",
+            position: "relative",
+            boxShadow: "0px 0px 10px 2px rgba(0, 0, 0, 0.3)"
+        }}>
             <header>
                 <h4>Login</h4>
                 <form onSubmit={formik.handleSubmit}>
