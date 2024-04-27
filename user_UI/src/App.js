@@ -6,7 +6,7 @@ import Signup from './Component/Modal/Signup'
 import Event from './Component/Pages/Event'
 import EventDetails from './Component/Pages/EventDetails'
 import Sidebar from './Component/SideBar/Sidebar'
-import Create from './Component/Pages/Create'
+import Create from './Component/Pages/CreateEvent'
 function App() {
   return (
     <BrowserRouter>

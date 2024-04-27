@@ -12,7 +12,7 @@ import { IoTicketOutline } from "react-icons/io5";
 import { BsCalendar4Event } from "react-icons/bs";
 import './Sidebar.css'
 import { NavLink } from 'react-router-dom';
-import Create from '../Pages/Create';
+import Create from '../Pages/CreateEvent';
 
 // import CreateButton from '../Dashboard/Button/CreateButton';
 
