@@ -5,10 +5,15 @@ import "../../CSS/common.css"
 const Layout = () => {
   return (
     <>
-      <Parent/>
+    <div style={{display: "flex"}}>
+      <div>
+        <Parent/>
+      </div>
+      
       <div className="left-width">
         <Outlet/>
       </div>
+    </div>
     </>
   )
 }
