@@ -23,7 +23,6 @@ const AuthRoute = () => {
     <Route path='/' element={<ProtectedPath component={EventDetails}/>}/>
     {/* <Route path='/' element={<ProtectedPath component={Event}/>}/> */}
 
-   </Routes>
    <Route path="/user" element={<Layout />}>
               <Route path="/user" element={<Home/>}/>
               <Route path="/user/allevents" element={<Event />} />
@@ -32,6 +31,7 @@ const AuthRoute = () => {
               <Route path="/user/notifications" element={<Notifications />} />
               <Route path="/user/createevent" element={<CreateEvent />} />
     </Route>  
+   </Routes>
    </BrowserRouter>
    </>
   )
