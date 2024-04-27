@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../CSS/newEventCreateForm.css'
 
-const Create = () => {
+const CreateEvent = () => {
   const [formData, setFormData] = useState({
     name: '',
     date: '',
@@ -116,4 +116,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreateEvent;
