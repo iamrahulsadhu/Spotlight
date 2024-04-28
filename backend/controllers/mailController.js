@@ -14,7 +14,7 @@ pass: 'nrmc yvqz vojv ldea',},
 const mailData = {
 name:"Spotlight",
 from: 'bwubca21211@brainwareuniversity.ac.in',
-to: 'spotlightmailer1234@gmail.com',
+to: 'anishdhat@gmail.com',
 subject: 'Sending Email using Node.js',text: 'That was easy!',
 html: `<Link>http://localhost:3000/events/event/${id}</Link>`,
 };

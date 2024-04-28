@@ -18,6 +18,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import '../../CSS/Event.css'
 import Events from '../../assets/events.jpg'
 import Music from '../../assets/musicevent.jpg'
 import Thrill from '../../assets/thrillerevents.jpg'
@@ -42,6 +43,8 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
+
+
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
@@ -240,7 +243,7 @@ function PrimarySearchAppBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2, }}
+            sx={{ padding: 0, margin: 0 }}
           >
             <MenuIcon />
           </IconButton>
@@ -330,6 +333,7 @@ const fetchEvents=async()=>{
     };
     dbData=await axios.get("http://localhost:4000/allevent",{headers})
     setData(dbData.data.data);
+    setFilterData (dbData.data.data);
     // setFilterData(dbData.data.data)
   } catch (err) {
     console.log(err.message);
@@ -456,8 +460,9 @@ const handleCategorySelect = (category) => {
     ))
   )}
   {data.length > displayCount && (
-    <Box sx={{ textAlign: 'center', marginTop: 3 }}>
-      <Button variant="outlined" onClick={handleSeeMore}>See more</Button>
+    <Box sx={{ textAlign: 'center', marginTop: 3, width:'100%',marginLeft:'25px' }}>
+      {/* <Button variant="outlined" onClick={handleSeeMore}></Button> */}
+      <button type="button" class="btn btn-primary btn-lg btn-block" style={{ width: '100%' }} onClick={handleSeeMore}>See more...</button>
     </Box>
   )}
    {data.length === 0 && (

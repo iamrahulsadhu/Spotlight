@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Di from '../assets/log1.png';
+import Di from '../assets/title-logo.png';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
 const drawerWidth = 240;
