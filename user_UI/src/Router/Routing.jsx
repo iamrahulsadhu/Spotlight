@@ -15,6 +15,7 @@ import MyEvent from '../Component/Pages/userDashboard/MyEvent';
 import Notifications from '@mui/icons-material/Notifications';
 const Routing = () => {
     const [data, setData] = useState([]);
+    // const [inviteSuccess, setInviteSuccess] = useState(false)
     // const [requestData,setRequestData] = useState([]);
     const [updateData, setUpdateData] = useState({});
     const [token, setToken] = useState("");
@@ -85,7 +86,7 @@ const invite=async(id)=>{
   await axios
   .post(`http://localhost:4000/mail/${id}`)
   .then((res) => {
-    alert("Done")
+    // alert("Done")
   })
   .catch((err) => {
     console.log(err.message);

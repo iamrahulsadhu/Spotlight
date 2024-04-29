@@ -71,7 +71,7 @@ function Login({login}) {
                         <a href="http://">Forget Password</a>
                     </div>
 
-                    <button type="submit">Login</button>
+                    <button type="submit" style={{width:'100%'}}>Login</button>
 
                     <div className="newAccount">
                         Don't have an account ? <a href="http://">Sign up</a>

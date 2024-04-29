@@ -42,7 +42,7 @@ const Signup = ({signup}) => {
             <Field type="password" name="password" placeholder="Password" />
             <ErrorMessage name="password" component="div" className="error" />
           </div>
-          <button type="submit" className="light">Sign Up</button>
+          <button type="submit" className="light" style={{width:'100%'}}>Sign Up</button>
           <p>Already have an account? <a href="#">Login</a></p>
         </Form>
       </Formik>
