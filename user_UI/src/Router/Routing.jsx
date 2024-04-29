@@ -8,11 +8,11 @@ import EventDetails from "../Component/Pages/EventDetails";
 import Dashboard from "../Component/Pages/userDashboard/Dashboard";
 import Layout from "../Component/Pages/userDashboard/Layout";
 import Home from "../Component/Pages/userDashboard/Home";
-import Update from "../Component/Pages/userDashboard/Update";
-import Insert from "../Component/Pages/userDashboard/Insert";
 import Request from "../Component/Pages/userDashboard/Request";
-import Error from '../Component/Pages/Error';
 import axios from "axios";
+import CreateEvent from '../Component/Pages/userDashboard/CreateEvent';
+import MyEvent from '../Component/Pages/userDashboard/MyEvent';
+import Notifications from '@mui/icons-material/Notifications';
 const Routing = () => {
     const [data, setData] = useState([]);
     // const [requestData,setRequestData] = useState([]);
@@ -273,12 +273,12 @@ const ticket=async()=>{
           element={localStorage.getItem("token") ? <EventDetails eventDetail={eventDetail} invite={invite} ticket={ticket}/> : <Navigate to="/login" />}
         />
         {/* Protected route for admin dashboard */}
-        <Route path="/admin" element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
+        <Route path="/user" element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
           <Route path="" element={<Dashboard data={data}/>} />
-          <Route path="table" element={localStorage.getItem("token") ?<Home table={table} data={data} deleteTrain={deleteTrain} /> : <Navigate to="/login" />} />
+          <Route path="home" element={localStorage.getItem("token") ?<Home table={table} data={data} deleteTrain={deleteTrain} /> : <Navigate to="/login" />} />
           <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} />
-          <Route path="insert" element={localStorage.getItem("token") ?<Insert insertData={insertData} /> : <Navigate to="/login" />} />
-          <Route path="update" element={localStorage.getItem("token") ?<Update updateTrainData={updateTrainData} updateData={updateData} /> : <Navigate to="/login" />} />
+          <Route path="create" element={localStorage.getItem("token") ?<CreateEvent insertData={insertData} /> : <Navigate to="/login" />} />
+          <Route path="myevents" element={localStorage.getItem("token") ?<MyEvent/> : <Navigate to="/login" />} />
         </Route>
       </Routes>
             )}

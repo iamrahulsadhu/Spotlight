@@ -330,6 +330,8 @@ const fetchEvents=async()=>{
     };
     dbData=await axios.get("http://localhost:4000/allevent",{headers})
     setData(dbData.data.data);
+    setFilterData(dbData.data.data);
+    console.log(data);
     // setFilterData(dbData.data.data)
   } catch (err) {
     console.log(err.message);

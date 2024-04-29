@@ -1,12 +1,19 @@
 import React from 'react'
 import Parent from './Parent'
 import { Outlet } from 'react-router-dom'
-const Layout = ({logout}) => {
+const Layout = () => {
   return (
     <>
-      <Parent logout={logout}/>
-      <Outlet/>
-</>
+    <div style={{display: "flex"}}>
+      <div>
+        <Parent/>
+      </div>
+      
+      <div className="left-width">
+        <Outlet/>
+      </div>
+    </div>
+    </>
   )
 }
 
