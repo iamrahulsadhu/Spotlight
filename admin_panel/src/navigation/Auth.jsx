@@ -71,9 +71,9 @@ const Auth = () => {
   };
   const table = async () => {
     await axios
-      .get("http://localhost:4000/admin/gettrains")
+      .get("http://localhost:4000/allevents")
       .then((res) => {
-        setData(() => res);
+        setData(() => res.data.data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -91,21 +91,6 @@ const Auth = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  };
-  const updateTrain = (id) => {
-    try {
-      // const updateData=data.data.filter((e)=>{
-      //   return id===e._id;
-      // })
-      const updateData = data.data.find((e) => {
-        return id === e._id;
-      });
-      setUpdateData(updateData);
-      console.log(updateData);
-      navigate("/admin/update");
-    } catch (err) {
-      console.log(err.emssage);
-    }
   };
   const updateTrainData = async (id, values) => {
     const {
@@ -145,7 +130,7 @@ const Auth = () => {
   const logInUser = async (values) => {
     const { adminName, password } = values;
     axios
-      .post("http://localhost:5000/admin/login", { adminName, password })
+      .post("http://localhost:4000/admin/login", { adminName, password })
       .then((res) => {
         console.log(res);
         navigate("/admin");
@@ -154,16 +139,14 @@ const Auth = () => {
         console.log(err.message);
       });
   };
-  const deleteTrain = async (id) => {
-    // if(confirm("Are you sure you want to delete the train")){
+  const accept = async (id,userid) => {
     await axios
-      .delete(`http://localhost:5000/admin/deletetrain/${id}`)
+      .post(`http://localhost:4000/accept/${id}`,{userid})
       .then((res) => {
         console.log(res);
-        table();
+        // table();
       })
       .catch((err) => {
-        console.log("hbwdcuhde");
         console.log(err.message);
       });
   };
@@ -173,7 +156,6 @@ const Auth = () => {
         <Route path="/" element={<Login logInUser={logInUser} />} />
         {first ? (
           <Route path="/admin" element={<Layout />}>
-            {/* <Route path="" element={<Login data={data}/>} /> */}
             <Route path="" element={<Dashboard data={data} />} />
             <Route
               path="/admin/table"
@@ -181,8 +163,7 @@ const Auth = () => {
                 <Home
                   table={table}
                   data={data}
-                  updateTrain={updateTrain}
-                  deleteTrain={deleteTrain}
+                  accept={accept}
                 />
               }
             />
@@ -207,9 +188,9 @@ const Auth = () => {
             />
           </Route>
         ) : null}
+        <Route path="*" element={<Login/>}/>
       </Routes>
     </>
   );
 };
-
 export default Auth;

@@ -4,6 +4,7 @@ class Mailer{
 static mail=async(req,res)=>{
   try {
     const id=req.params.id;
+    const {mail}=req.body;
 const transporter = nodemailer.createTransport({port: 465,
 host: "smtp.gmail.com",
 auth: {
@@ -14,7 +15,7 @@ pass: 'nrmc yvqz vojv ldea',},
 const mailData = {
 name:"Spotlight",
 from: 'bwubca21211@brainwareuniversity.ac.in',
-to: 'anishdhat@gmail.com',
+to:`${mail}`,
 subject: 'Sending Email using Node.js',text: 'That was easy!',
 html: `<Link>http://localhost:3000/events/event/${id}</Link>`,
 };
@@ -36,6 +37,7 @@ static ticket=async(req,res)=>{
     try {
         const url = req.query.url || 'https://example.com';
         const qrCodeImage = await qrcode.toDataURL(url);
+        console.log("QR Code Image:", qrCodeImage); 
         const transporter = nodemailer.createTransport({port: 465,
             host: "smtp.gmail.com",
             auth: {
@@ -48,7 +50,7 @@ static ticket=async(req,res)=>{
             from: 'bwubca21211@brainwareuniversity.ac.in',
             to: 'spotlightmailer1234@gmail.com',
             subject: 'Sending Email using Node.js',text: 'That was easy!',
-            html: `<p>sdxiiwoh</p><img src=${qrCodeImage}/>`,
+            html: `<img src="${qrCodeImage}"/>`,
             };
             transporter.sendMail(mailData, function (err, info) {
             if(err){

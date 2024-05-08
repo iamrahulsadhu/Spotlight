@@ -23,9 +23,20 @@ catch(err)
 }
     }
 static addEvent=async(req,res)=>{
-        const {eventName,timing,details}=req.body;
+        const {name,
+          category,
+          date,
+          timing,
+          photo,
+          details,id}=req.body;
         try {
-            const data=await request.create({eventName,timing,details});
+            const data=await request.create({name,
+              category,
+              date,
+              timing,
+              photo,
+              details,
+              creatorId:id});
             // admin.requests.push(data._id);
             await admin.updateOne({userName:"Admin"},
               { $push: { requests: data._id } })

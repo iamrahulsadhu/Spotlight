@@ -5,29 +5,29 @@ const Dashboard = () => {
   const [totalTrains, setTotalTrains] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const fetchTotalTrains = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/admin/counttrains");
-        setTotalTrains(response.data.count);
-      } catch (error) {
-        console.error("Error fetching total trains:", error);
-      }
-    };
+  //   const fetchTotalTrains = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/admin/counttrains");
+  //       setTotalTrains(response.data.count);
+  //     } catch (error) {
+  //       console.error("Error fetching total trains:", error);
+  //     }
+  //   };
 
-    const fetchTotalUsers = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/admin/countusers");
-        setTotalUsers(response.data.count);
-      } catch (error) {
-        console.error("Error fetching total trains:", error);
-      }
-    };
+  //   const fetchTotalUsers = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5000/admin/countusers");
+  //       setTotalUsers(response.data.count);
+  //     } catch (error) {
+  //       console.error("Error fetching total trains:", error);
+  //     }
+  //   };
 
-    fetchTotalTrains();
-    fetchTotalUsers();
-  }, []);
+  //   fetchTotalTrains();
+  //   fetchTotalUsers();
+  // }, []);
   return (
     <div className="col-9 pt-3 second-col">
       <header className="head">
