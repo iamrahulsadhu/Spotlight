@@ -5,13 +5,12 @@ import Login from "../Component/Modal/Login";
 import Signup from "../Component/Modal/Signup";
 import Event from "../Component/Pages/Event";
 import EventDetails from "../Component/Pages/EventDetails";
-import Dashboard from "../Component/Pages/userDashboard/Dashboard";
 import Layout from "../Component/Pages/userDashboard/Layout";
 import Home from "../Component/Pages/userDashboard/Home";
-import Request from "../Component/Pages/userDashboard/Request";
 import axios from "axios";
 import CreateEvent from '../Component/Pages/userDashboard/CreateEvent';
 import MyEvent from '../Component/Pages/userDashboard/MyEvent';
+import Dashboard from '../Component/Pages/userDashboard/Dashboard';
 import Notifications from '@mui/icons-material/Notifications';
 const Routing = () => {
     const [data, setData] = useState([]);
@@ -208,7 +207,7 @@ const createEvent=async(formData,id)=>{
         <Route path=":id"  element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
           <Route path="" element={<Dashboard data={data}/>} />
           <Route path="home" element={localStorage.getItem("token") ?<Home /> : <Navigate to="/login" />} />
-          <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} />
+          {/* <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} /> */}
           <Route path="create" element={localStorage.getItem("token") ?<CreateEvent createEvent={createEvent} /> : <Navigate to="/login" />} />
           <Route path="myevents" element={localStorage.getItem("token") ?<MyEvent/> : <Navigate to="/login" />} />
         </Route>
