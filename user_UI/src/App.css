@@ -245,14 +245,13 @@ td {
   justify-content: center;
   position: absolute;
   top: 105px;
-
 }
 .updateForm {
   background: white;
-  border: 0 solid rgba(0, 0, 0, 0.125);
+  border: 0 solid rgba(0,0,0,0.125);
   border-radius: 0.75rem;
   box-shadow: 0rem 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1),
-    0rem 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.06);
+  0rem 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.06);
   position: relative;
   top: 50px;
   display: flex;
@@ -261,7 +260,7 @@ td {
   padding: 0px 40px;
   width: 600px;
   backdrop-filter: saturate(200%) blur(1.875rem);
-    background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .updateInput {
   width: 404px;
