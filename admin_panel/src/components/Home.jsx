@@ -1,11 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, Link, To } from "react-router-dom";
-const Home = (props) => {
-  const [data, setData] = useState([]);
+const Home = ({table,data,accept}) => {
   useEffect(() => {
-    props.table();
-  }, []);
+    table();
+  }, [data]);
 
   return (
     <>
@@ -59,64 +58,37 @@ const Home = (props) => {
           </div>
           <div className="tableContainer">
             <table>
+              <tbody>
               <tr>
                 <th> </th>
-                <th colSpan="3">Name</th>
-                <th>Number</th>
-                <th colSpan="3">Source</th>
-                <th colSpan="3">Destination</th>
+                <th colSpan="3">Event Name</th>
+                <th colSpan="3">Date</th>
+                <th colSpan="3">Timing</th>
                 <th>
-                  Departure
-                  <br />
-                  Time
-                </th>
-                <th>
-                  Arrival <br />
-                  Time
-                </th>
-                <th>
-                  Total <br />
-                  Seats
-                </th>
-                <th>Price</th>
+                  Category
+                 </th>
               </tr>
-              {console.log("kjsxi")}
-              {console.log(props.data)}
-              {props.data.data
-                ? props.data.data.map((e) => {
+              {data
+                ?data.map((e) => {
                     return (
-                      <tr>
+                      <tr key={e._id}>
                         <td>
                           <div className="train-icon">
                             <span>7</span>
                           </div>
                         </td>
-                        <td colSpan="3">{e.trainName}</td>
-                        <td>{e.trainNumber}</td>
-                        <td colSpan="3">{e.source}</td>
-                        <td colSpan="3">{e.destination}</td>
-                        <td>{e.departureTime}</td>
-                        <td>{e.arrivalTime}</td>
-                        <td>{e.totalSeats}</td>
-                        <td>{e.pricePerTicket}</td>
+                        <td colSpan="3">{e.name}</td>
+                        <td>{e.date}</td>
+                        <td colSpan="3">{e.timing}</td>
+                        <td colSpan="3">{e.category}</td>
                         <td>
                           <button
                             className="btn btn-primary"
                             onClick={() => {
-                              props.updateTrain(e._id);
+                              accept(e._id,e.creatorId);
                             }}
                           >
-                            Edit
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            className="btn deleteBtn"
-                            onClick={() => {
-                              props.deleteTrain(e._id);
-                            }}
-                          >
-                            Delete
+                            Accept
                           </button>
                         </td>
                         {/* <td>{e.pricePerTicket}</td> */}
@@ -124,6 +96,7 @@ const Home = (props) => {
                     );
                   })
                 : console.log("No value")}
+                </tbody>
             </table>
           </div>
         </div>

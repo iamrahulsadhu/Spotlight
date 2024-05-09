@@ -13,15 +13,15 @@ import { BsCalendar4Event } from "react-icons/bs";
 import './Sidebar.css'
 import { NavLink } from 'react-router-dom';
 
-import CreateButton from '../Dashboard/Button/CreateButton';
+// import CreateButton from '../Dashboard/Button/CreateButton';
 
 
 
 const routes = [
     {
-        path: "/",
+        path: "/userdashboard/",
         name: "Home",
-        icon: <FaHome />,
+        icon: <FaHome />
     },
     {
         path: "/events",
@@ -42,7 +42,7 @@ const routes = [
         path: "/notifications",
         name: "Notifications",
         icon: <IoIosNotificationsOutline />,
-    },
+}
 ];
 
 const Sidebar = ({children}) => {
@@ -96,6 +96,18 @@ const Sidebar = ({children}) => {
             </div>
 
             <section className="routes">
+            <NavLink
+                        activeClassName="active"
+                        to="/"
+                        key="Home"
+                        className="link"
+                    />
+            <NavLink
+                        activeClassName="active"
+                        to="/invites"
+                        key="Invites"
+                        className="link"
+                    />
                 {routes.map((route) => (
                     <NavLink
                         activeClassName="active"

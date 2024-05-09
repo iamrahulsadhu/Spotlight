@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import '../../CSS/login.css'
 import axios from 'axios';
-function Login() {
+function Login({login}) {
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -14,26 +14,24 @@ function Login() {
             email: Yup.string().email('Invalid email address').required('Required'),
             password: Yup.string().required('Required')
         }),
-        onSubmit:async(values) => {
+        onSubmit:(values) => {
             // Handle form submission here
-
-            try{
-                const{email,password}=values;
-                await axios.post("http://localhost:4000/login",{
-                  email,password
-                })
-            console.log('Form values:', values);
+              login(values)
         }
-        catch(err)
-        {
-            console.log(err.message);
-        }
-    }
     });
 
     return (
         <div className="containerMain">
-        <main>
+        <main style={{
+            width: "300px",
+            padding: "7em 2.5em 2.5em",
+            borderRadius: "10px",
+            border: "2px solid white",
+            backgroundColor: "transparent",
+            backdropFilter: "blur(25px)",
+            position: "relative",
+            boxShadow: "0px 0px 10px 2px rgba(0, 0, 0, 0.3)"
+        }}>
             <header>
                 <h4>Login</h4>
                 <form onSubmit={formik.handleSubmit}>
@@ -82,7 +80,7 @@ function Login() {
                         <a href="http://">Forget Password</a>
                     </div>
 
-                    <button type="submit">Login</button>
+                    <button type="submit" style={{width:'100%'}}>Login</button>
 
                     <div className="newAccount">
                         Don't have an account ? <a href="http://">Sign up</a>

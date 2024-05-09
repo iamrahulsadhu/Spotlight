@@ -16,6 +16,10 @@ const user=mongoose.Schema({
      password:{
         type:String,
         required:true
-     }
+     },
+     myevents:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'event'
+   }]
 })
 module.exports=mongoose.model("userData",user);

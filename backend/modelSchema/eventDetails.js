@@ -1,15 +1,18 @@
 const mongoose=require("../database/dbConnect");
 const event=mongoose.Schema({
-     eventName:{
+   name:{
         type:String,
         required:true
      },
      photo:{
         type:String,
      },
+     date:{
+      type:String,
+      required:true,
+   },
      timing:{
-        type:String,
-        required:true,
+        type:String
      },
      details:{
         type:String,
@@ -17,7 +20,7 @@ const event=mongoose.Schema({
      },
      category: {
       type: String,
-      enum: ["music", "thriller", "sports","comedy","birthday"]
+      enum: ["music","sports","comedy","birthday"]
     }
 })
 module.exports=mongoose.model("event",event);

@@ -13,13 +13,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Di from '../assets/log1.png';
+import Di from '../assets/title-logo.png';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
 const drawerWidth = 240;
 const navItems = ['Explore', 'Login', 'Signup'];
 
 const Landing = () => {
+    const [isLogin, setIsLogin] = useState(false);
     const nav = useNavigate();
 
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -28,12 +29,17 @@ const Landing = () => {
         setMobileOpen(!mobileOpen);
     };
     const handleClick = (item) => {
+        localStorage.setItem("logid",true);
+        let i=localStorage.getItem("logid");
+        console.log(i);
+        setIsLogin(i);
         switch (item) {
             case 'Explore':
-                nav("/");
+                console.log(isLogin);
+               i===true?nav("/events"):nav("/login")
                 break;
             case 'Login':
-                nav('/login');
+                i?nav("/login"):alert("You are already logged in")
                 break;
             case 'Signup':
                 nav('/Signup');
@@ -116,7 +122,7 @@ const Landing = () => {
                     <Button   style={{ marginRight: 20, borderRadius:30,backgroundColor:'#63d3ff',color:'#fff',height:50,width:150 }}>
                         Get Started
                     </Button>
-                    <Button  style={{borderRadius:30,backgroundColor:'#e81361',color:'#fff',height:50,width:150}} >
+                    <Button  style={{borderRadius:30,backgroundColor:'#e81361',color:'#fff',height:50,width:150}}onClick={() => handleClick("Explore")}>
                         Explore Events
                     </Button>
                 </div>
