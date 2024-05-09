@@ -14,9 +14,11 @@ const AuthRoute = () => {
     <Route path='/' element={<Landing/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
-    <Route path='/' element={<ProtectedPath component={EventDetails}/>}/>
+    {/* <Route path='/' element={<ProtectedPath component={EventDetails}/>}/>
 
-    <Route path='/' element={<ProtectedPath component={Event}/>}/>
+    <Route path='/' element={<ProtectedPath component={Event}/>}/> */}
+    <Route path='/Events' element={<Event/>}/>
+    <Route path='/Eventdetails' element={<EventDetails/>}/>
 
    </Routes>
    </BrowserRouter>

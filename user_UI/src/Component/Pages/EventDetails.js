@@ -48,7 +48,7 @@ const EventDetails = () => {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
                                 <LocationOnIcon style={{ marginLeft: '10px' }} />
-                                <p>Phalgunir Garer tolai</p>
+                                <p>Newtown Rajarhat</p>
                             </div>
                             <div>
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d14707.902672582657!2d88.62413395!3d22.8403897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sin!4v1688484010581!5m2!1sen!2sin"
