@@ -1,0 +1,8 @@
+button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit.MuiIconButton-edgeStart.MuiIconButton-sizeLarge.css-1yp54ul-MuiButtonBase-root-MuiIconButton-root {
+    
+    width: 100px;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled){
+    width: 80px;
+    height: 50px;
+}
