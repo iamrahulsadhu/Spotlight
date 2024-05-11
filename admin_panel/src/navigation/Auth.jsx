@@ -11,27 +11,12 @@ import Layout from "../components/Layout";
 import Home from "../components/Home";
 import Update from "../components/Update";
 import Insert from "../components/Insert";
-import Request from "../components/Request";
 import axios from "axios";
 import Login from "../components/Login";
-// import Login from "../components/Login.";
 const Auth = () => {
   const [data, setData] = useState([]);
-  // const [requestData,setRequestData] = useState([]);
   const [updateData, setUpdateData] = useState({});
   const [first, setfirst] = useState(true);
-  useEffect(() => {
-    const getData = async () => {
-      await axios
-        .get("http://localhost:5000/admin/gettrains")
-        .then((res) => {
-          setData(() => res);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    };
-  }, []);
   const navigate = useNavigate();
   const insertData = async (e, values) => {
     e.preventDefault();
