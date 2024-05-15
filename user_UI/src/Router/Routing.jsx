@@ -12,6 +12,7 @@ import CreateEvent from '../Component/Pages/userDashboard/CreateEvent';
 import MyEvent from '../Component/Pages/userDashboard/MyEvent';
 import Dashboard from '../Component/Pages/userDashboard/Dashboard';
 import Notifications from '@mui/icons-material/Notifications';
+import Rsvp from '../Component/Pages/userDashboard/Rsvp';
 const Routing = () => {
     const [data, setData] = useState([]);
     // const [requestData,setRequestData] = useState([]);
@@ -210,6 +211,7 @@ const createEvent=async(formData,id)=>{
           {/* <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} /> */}
           <Route path="create" element={localStorage.getItem("token") ?<CreateEvent createEvent={createEvent} /> : <Navigate to="/login" />} />
           <Route path="myevents" element={localStorage.getItem("token") ?<MyEvent/> : <Navigate to="/login" />} />
+          <Route path="rsvp" element={localStorage.getItem("token") ?<Rsvp/> : <Navigate to="/login" />} />
         </Route>
       </Routes>
             )}
