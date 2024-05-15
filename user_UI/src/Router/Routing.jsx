@@ -5,17 +5,16 @@ import Login from "../Component/Modal/Login";
 import Signup from "../Component/Modal/Signup";
 import Event from "../Component/Pages/Event";
 import EventDetails from "../Component/Pages/EventDetails";
-import Dashboard from "../Component/Pages/userDashboard/Dashboard";
 import Layout from "../Component/Pages/userDashboard/Layout";
 import Home from "../Component/Pages/userDashboard/Home";
-import Update from "../Component/Pages/userDashboard/Update";
-import Insert from "../Component/Pages/userDashboard/Insert";
-import Request from "../Component/Pages/userDashboard/Request";
-import Error from '../Component/Pages/Error';
 import axios from "axios";
+import CreateEvent from '../Component/Pages/userDashboard/CreateEvent';
+import MyEvent from '../Component/Pages/userDashboard/MyEvent';
+import Dashboard from '../Component/Pages/userDashboard/Dashboard';
+import Notifications from '@mui/icons-material/Notifications';
+import Rsvp from '../Component/Pages/userDashboard/Rsvp';
 const Routing = () => {
     const [data, setData] = useState([]);
-    // const [inviteSuccess, setInviteSuccess] = useState(false)
     // const [requestData,setRequestData] = useState([]);
     const [updateData, setUpdateData] = useState({});
     const [token, setToken] = useState("");
@@ -58,7 +57,8 @@ const Routing = () => {
         let jwtId=await axios.post("http://localhost:4000/login",{
           email,password
         })
-        localStorage.setItem("token",jwtId.data);
+        localStorage.setItem("token",jwtId.data.token);
+        localStorage.setItem("id",jwtId.data.id);
         setToken(jwtId.data.data);
         setIsLoggedIn(true);
         console.log(isLoggedIn);
@@ -82,11 +82,11 @@ const eventDetail=async(id)=>{
     console.log(err.message);
   });
 }
-const invite=async(id)=>{
+const invite=async(id,mail)=>{
   await axios
-  .post(`http://localhost:4000/mail/${id}`)
+  .post(`http://localhost:4000/mail/${id}`,{mail})
   .then((res) => {
-    // alert("Done")
+    alert("Done")
   })
   .catch((err) => {
     console.log(err.message);
@@ -105,52 +105,30 @@ const ticket=async()=>{
     console.log(err.message);
   });
 }
-    const insertData = async (e, values) => {
-      e.preventDefault();
-      const {
-        trainName,
-        trainNumber,
-        source,
-        destination,
-        acSeats,
-        nonAcSeats,
-        departureTime,
-        arrivalTime,
-        totalSeats,
-        pricePerTicket,
-      } = values;
-      await axios
-        .post("http://localhost:5000/admin/insert", {
-          trainName,
-          trainNumber,
-          source,
-          destination,
-          acSeats,
-          nonAcSeats,
-          departureTime,
-          arrivalTime,
-          totalSeats,
-          pricePerTicket,
-        })
-        .then((res) => {
-          console.log(res);
-          navigate("/admin/table");
-        })
-        .catch((err) => {
-          console.log("hbwdcuhde");
-          console.log(err.message);
-        });
-    };
-    const table = async () => {
-      await axios
-        .get("http://localhost:4000/admin/gettrains")
-        .then((res) => {
-          setData(() => res);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    };
+const createEvent=async(formData,id)=>{
+  const { 
+  name,
+  category,
+  date,
+  timing,
+  photo,
+  details}=formData;
+  await axios
+  .post("http://localhost:4000/eventadd",{ name,
+  category,
+  date,
+  timing,
+  // photo,
+  details,id})
+  .then((res) => {
+    console.log(res.data.data);
+    requestData = res.data.data;
+    console.log(requestData);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+}
     let requestData;
     const requests = async () => {
       await axios
@@ -164,57 +142,10 @@ const ticket=async()=>{
           console.log(err.message);
         });
     };
-    const updateTrainData = async (id, values) => {
-      const {
-        trainName,
-        trainNumber,
-        source,
-        destination,
-        acSeats,
-        nonAcSeats,
-        departureTime,
-        arrivalTime,
-        totalSeats,
-        pricePerTicket,
-      } = values;
-      await axios
-        .put(`http://localhost:5000/admin/trainupdate/${id}`, {
-          trainName,
-          trainNumber,
-          source,
-          destination,
-          acSeats,
-          nonAcSeats,
-          departureTime,
-          arrivalTime,
-          totalSeats,
-          pricePerTicket,
-        })
-        .then((res) => {
-          console.log(res);
-          navigate("/admin/table");
-        })
-        .catch((err) => {
-          console.log("hbwdcuhde");
-          console.log(err.message);
-        });
-    };
     const logout=()=>{
       localStorage.removeItem("token");
       navigate("/")
     }
-    const deleteTrain = async (id) => {
-      // if(confirm("Are you sure you want to delete the train")){
-      await axios
-        .delete(`http://localhost:5000/admin/deletetrain/${id}`)
-        .then((res) => {
-          console.log(res);
-          table();
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    };
     const isAuthenticated = () => {
       // Implement your authentication logic here
       // For example, check if the user is logged in
@@ -274,12 +205,13 @@ const ticket=async()=>{
           element={localStorage.getItem("token") ? <EventDetails eventDetail={eventDetail} invite={invite} ticket={ticket}/> : <Navigate to="/login" />}
         />
         {/* Protected route for admin dashboard */}
-        <Route path="/admin" element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
+        <Route path=":id"  element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
           <Route path="" element={<Dashboard data={data}/>} />
-          <Route path="table" element={localStorage.getItem("token") ?<Home table={table} data={data} deleteTrain={deleteTrain} /> : <Navigate to="/login" />} />
-          <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} />
-          <Route path="insert" element={localStorage.getItem("token") ?<Insert insertData={insertData} /> : <Navigate to="/login" />} />
-          <Route path="update" element={localStorage.getItem("token") ?<Update updateTrainData={updateTrainData} updateData={updateData} /> : <Navigate to="/login" />} />
+          <Route path="home" element={localStorage.getItem("token") ?<Home /> : <Navigate to="/login" />} />
+          {/* <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} /> */}
+          <Route path="create" element={localStorage.getItem("token") ?<CreateEvent createEvent={createEvent} /> : <Navigate to="/login" />} />
+          <Route path="myevents" element={localStorage.getItem("token") ?<MyEvent/> : <Navigate to="/login" />} />
+          <Route path="rsvp" element={localStorage.getItem("token") ?<Rsvp/> : <Navigate to="/login" />} />
         </Route>
       </Routes>
             )}

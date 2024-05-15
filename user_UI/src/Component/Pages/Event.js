@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -129,7 +130,11 @@ const ContentItem = ({ title, image, description,date,id}) => {
         <Content>
           <Typography variant="h6">{title}</Typography>
           <img src={image} alt={title} style={{ width: '100%', height: 'auto', marginBottom: '1rem' }} />
-          <Typography>{description}</Typography>
+          <Typography style={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}>{description}</Typography>
         </Content>
       </Paper>
     </Grid>
@@ -138,6 +143,7 @@ const ContentItem = ({ title, image, description,date,id}) => {
 
 
 function PrimarySearchAppBar() {
+  const navigate=useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -153,9 +159,10 @@ function PrimarySearchAppBar() {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+    navigate(`/${localStorage.getItem("id")}`);
     handleMobileMenuClose();
   };
-
+  
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -229,7 +236,7 @@ function PrimarySearchAppBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to="/user">Profile</Link>
       </MenuItem>
     </Menu>
   );

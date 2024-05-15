@@ -9,16 +9,27 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import MovieCreationIcon from '@mui/icons-material/MovieCreation';
 import XIcon from '@mui/icons-material/X';
 import { CheckCircleOutline } from '@mui/icons-material';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import EmailIcon from '@mui/icons-material/Email';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import '../../CSS/Eventdetails.css';
-import '../../CSS/Popup.css'
-
+// import '../../CSS/Popup';
+import { useNavigate } from 'react-router-dom';
 const EventDetails = ({ eventDetail, invite, ticket }) => {
+    const nav=useNavigate();
     const [paramsid, setParamsid] = useState()
+    const [show, setShow] = useState(false);
+    const [mail, setMail] = useState("")
     const [inviteSuccess, setInviteSuccess] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [loading, setLoading] = useState(false); // State for loader
     const { id } = useParams();
-
     useEffect(() => {
         setParamsid(id);
         eventDetail(id);
@@ -28,10 +39,14 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
     const openPopup = () => {
         setShowPopup(true);
     };
-
+    const handleChange=(e)=>{
+               setMail(e.target.value)
+   }
     const closePopup = () => {
         setShowPopup(false);
     };
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleSendInvite = () => {
         setLoading(true); // Show loader when sending invite
@@ -41,13 +56,27 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
             setLoading(false); // Hide loader after delay
             // Call the invite function here
 
-            invite(paramsid);
+            invite(paramsid,mail);
             setInviteSuccess(true);
         }, 2000); // Adjust the delay time as needed
     };
 
     return (
         <div>
+               <Navbar bg="dark" variant="dark">
+                <Nav className="mr-auto">
+                    <Nav.Link href="#home"><ArrowBackIcon onClick={() => nav('/Events')}/></Nav.Link> {/* Back icon */}
+                    <Navbar.Brand href="#home" style={{ fontWeight: 'bold', marginLeft: '30px' }}>Spotlight</Navbar.Brand>
+                </Nav>
+                <Nav style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+                    <Nav.Link href="#profile"><NotificationsIcon /></Nav.Link> {/* Profile icon */}
+                    <span style={{ margin: '0 10px' }}></span> {/* Spacer */}
+                    <Nav.Link href="#message"><EmailIcon /></Nav.Link> {/* Message icon */}
+                    <span style={{ margin: '0 10px' }}></span> {/* Spacer */}
+                    <Nav.Link href="#notification"><AccountCircleIcon onClick={() => nav('/userDashboard')}/></Nav.Link> {/* Notification icon */}
+                </Nav>
+
+            </Navbar>
             <div className='card-container' style={{ marginTop: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <div className="card" style={{ width: '40rem', margin: '10px 20px' }}>
                     <img src={cc} className="card-img-top" alt="..." />
@@ -99,12 +128,12 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                                 <MovieCreationIcon style={{ fontSize: '40px' }} />
                                 <p style={{ marginTop: '10px', fontSize: '20px' }}>Free</p>
                                 <XIcon style={{ marginLeft: '45px' }} />
-                                <p className="invitestyle"  onClick={openPopup}>Invite your friends</p>
+                                <p className="invitestyle" onClick={openPopup}>Invite your friends</p>
                                 {showPopup && (
                                     <div className="popup-overlay">
                                         <div className="popup">
                                             Name <input type='text' placeholder='Name' id='name' style={{ borderRadius: '10px', border: '0.5px solid black', marginBottom: '10px', color: 'black' }} />
-                                            Email <input type='email' placeholder='Email' id='email' style={{ borderRadius: '10px', border: '0.5px solid black', marginBottom: '10px', color: 'black' }} />
+                                            Email <input type='email' placeholder='Email' id='email'onChange={(e)=>handleChange(e)} style={{ borderRadius: '10px', border: '0.5px solid black', marginBottom: '10px', color: 'black' }} />
 
                                             <div className="popup-buttons">
                                                 {/* Disable button when loading */}
@@ -114,17 +143,62 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                                                 <button type="button" className="btn btn-danger" style={{ width: '100%' }} onClick={closePopup}>Cancel</button>
                                             </div>
                                             {inviteSuccess && (
-                                                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                 <CheckCircleOutline style={{ color: 'green' }} />
-                                                
-                                             </div>
+                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    <CheckCircleOutline style={{ color: 'green' }} />
+
+                                                </div>
                                             )}
                                         </div>
                                     </div>
                                 )}
                             </div>
                             <div>
-                                <button type="button" className="btn btn-danger" style={{ width: '100%' }} onClick={ticket}>RSVP/ Add Ticket</button>
+                                {/* <button type="button" className="btn btn-danger" style={{ width: '100%' }} onClick={ticket}>RSVP/ Add Ticket</button> */}
+                                <button type="button" className="btn btn-danger" style={{ width: '100%' }} onClick={handleShow}>RSVP/ Add Ticket</button>
+                                {setShow && (
+                                    <>
+                                        <Modal show={show} onHide={handleClose}>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>Send Ticket</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <Form>
+                                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                        <Form.Label>Name</Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            placeholder="ankit kesari"
+                                                            autoFocus
+                                                           
+                                                        />
+                                                        <Form.Label style={{marginTop:'10px'}}>Email</Form.Label>
+                                                        <Form.Control
+                                                            type="email"
+                                                            placeholder="name@example.com"
+                                                            autoFocus
+                                                            style={{marginTop:'5px'}}
+                                                        />
+                                                    </Form.Group>
+                                                    <Form.Group
+                                                        className="mb-3"
+                                                        controlId="exampleForm.ControlTextarea1"
+                                                    >
+                                                        <Form.Label>Type Your Message</Form.Label>
+                                                        <Form.Control as="textarea" rows={3} />
+                                                    </Form.Group>
+                                                </Form>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleClose}>
+                                                    Close
+                                                </Button>
+                                                <Button variant="primary" style={{width:'30%'}} onClick={handleClose}>
+                                                    Save Changes
+                                                </Button>
+                                            </Modal.Footer>
+                                        </Modal>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

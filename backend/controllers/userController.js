@@ -39,7 +39,7 @@ class User{
           }
           jwt.sign({existingUser}, 'hello world', { expiresIn: '1h' },(err, token) => {
             if(err) { console.log(err) }    
-            res.send(token);
+            res.send({token:token,id:existingUser._id});
         });
           console.log(existingUser);
           // res.status(200).send({ user: existingUser });

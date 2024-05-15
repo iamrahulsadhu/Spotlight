@@ -22,26 +22,26 @@ const routes = [
         path: "/userdashboard/",
         name: "Home",
         icon: <FaHome />
-    // },
-    // {
-    //     path: "/events",
-    //     name: "Events",
-    //     icon: <BsCalendar4Event />,
-    // },
-    // {
-    //     path: "/invites",
-    //     name: "Invites",
-    //     icon: <IoTicketOutline />,
-    // },
-    // {
-    //     path: "/rsvp",
-    //     name: "Rsvp",
-    //     icon: <FaUserGroup />,
-    // },
-    // {
-    //     path: "/notifications",
-    //     name: "Notifications",
-    //     icon: <IoIosNotificationsOutline />,
+    },
+    {
+        path: "/events",
+        name: "Events",
+        icon: <BsCalendar4Event />,
+    },
+    {
+        path: "/invites",
+        name: "Invites",
+        icon: <IoTicketOutline />,
+    },
+    {
+        path: "/rsvp",
+        name: "Rsvp",
+        icon: <FaUserGroup />,
+    },
+    {
+        path: "/notifications",
+        name: "Notifications",
+        icon: <IoIosNotificationsOutline />,
 }
 ];
 
@@ -108,7 +108,7 @@ const Sidebar = ({children}) => {
                         key="Invites"
                         className="link"
                     />
-                {/* {routes.map((route) => (
+                {routes.map((route) => (
                     <NavLink
                         activeClassName="active"
                         to={route.path}
@@ -129,7 +129,7 @@ const Sidebar = ({children}) => {
                             )}
                         </AnimatePresence>
                     </NavLink>
-                ))} */}
+                ))}
             </section>
         </motion.div>
             

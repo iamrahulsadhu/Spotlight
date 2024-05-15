@@ -1,23 +1,31 @@
 const mongoose=require("../database/dbConnect");
 const request=mongoose.Schema({
-     eventName:{
+   name:{
         type:String,
         required:true
      },
      photo:{
         type:String,
      },
-     timing:{
+     date:{
         type:String,
         required:true,
-     },
+     }, 
+     timing:{
+      type:String,
+      required:true,
+   },
      details:{
         type:String,
         required:true
      },
+     creatorId:{
+      type:String,
+      required:true
+     },
      category: {
       type: String,
-      enum: ["music", "thriller", "sports","comedy","birthday"]
+      enum: ["music","sports","comedy","birthday"]
     }
 })
 module.exports=mongoose.model("request",request);
