@@ -3,7 +3,21 @@ import React from 'react'
 const Rsvp = () => {
   return (
     <div>
-      <h1>Rsvp Page</h1>
+      <h2>Events created by the user</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Event ID</th>
+                  <th>Event Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>csdc</td>
+                  <td>csdc</td>
+                </tr>
+              </tbody>
+            </table>
     </div>
   )
 }
