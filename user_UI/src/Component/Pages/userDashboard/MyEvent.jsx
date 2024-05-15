@@ -1,11 +1,7 @@
-import React from 'react'
-
 const MyEvent = () => {
-  return (
-    <div>
-      <p>Hello this is my events route</p>
-    </div>
-  )
+    return(
+        <h1>myevents</h1>
+    )
 }
 
-export default MyEvent
+export default MyEvent;

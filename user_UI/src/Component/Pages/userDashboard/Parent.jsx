@@ -4,13 +4,12 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { FaUserGroup } from "react-icons/fa6";
 import { IoTicketOutline } from "react-icons/io5";
 import { BsCalendar4Event } from "react-icons/bs";
-import { Link,useParams} from "react-router-dom";
+import { Link } from "react-router-dom";
 const Parent = () => {
-  const {id}=useParams();
   return (
     <>
     <div>
-      <div className="col-12 side-nav" style={{
+      <div className="col-1 side-nav" style={{
         backgroundColor: "#000066",
         flexDirection: "column",
         display: "flex",
@@ -40,12 +39,12 @@ const Parent = () => {
         cursor: "pointer",
         marginTop: "5rem"
       }}>
-        <Link to={`/${localStorage.getItem("id")}`} className="linkStyle"><FaHome /> Home</Link>
-      <Link to={`/${id}/allevents`} ><BsCalendar4Event /> All Events</Link>
-      <Link to={`/${id}/myevents`} ><IoTicketOutline /> My Events</Link>
-      <Link to={`/${id}/rsvp`}><FaUserGroup /> RSVP</Link>
-      <Link to={`/${id}/notifications`} ><IoIosNotificationsOutline /> Notifications</Link>
-        <Link to={`/${id}/create`}>Create Event</Link>
+        <Link to="/user" className="linkStyle"><FaHome /> Home</Link>
+        <Link to="/user/allevents" ><BsCalendar4Event /> All Events</Link>
+        <Link to="/user/myevents" ><IoTicketOutline /> My Events</Link>
+        <Link to="/user/rsvp" ><FaUserGroup /> RSVP</Link>
+        <Link to="/user/notifications" ><IoIosNotificationsOutline /> Notifications</Link>
+        <Link to="/user/createevent" >Create Event</Link>
         <Link to="/" style={{ marginTop: "18rem" }}>Logout</Link>
         </div>
       </div>

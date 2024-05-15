@@ -1,149 +1,81 @@
-import React, { useState } from 'react';
-import {useParams} from 'react-router-dom';
-const CreateEvent = ({createEvent}) => {
-  const { id } = useParams();
-  const [formData, setFormData] = useState({
-    name: '',
-    category:'',
-    date: '',
-    timing: '',
-    photo: '',
-    details: ''
-  });
+import React, { useState } from "react";
+const CreateEvent = () => {
+  // State variables to store form data
+  const [eventName, setEventName] = useState("");
+  const [date, setDate] = useState("");
+  const [timing, setTiming] = useState("");
+  const [photo, setPhoto] = useState(null);
+  const [eventDetails, setEventDetails] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value, type } = e.target;
-    if (type === 'file') {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          [name]: reader.result
-        });
-      };
-      if (file) {
-        reader.readAsDataURL(file);
-      }
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    }
-  };
-  
-
+  // Function to handle form submission
   const handleSubmit = (e) => {
-    try{
     e.preventDefault();
-    createEvent(formData,id);
-    console.log(formData);
-    setFormData({
-        name: '',
-        date: '',
-        category:'',
-        timing: '',
-        photo: '',
-        details: ''
-    });
-  }
-  catch(err)
-  {
-    console.log(err.message); 
-  }
+    console.log("Form submitted:", { eventName, date, timing, photo, eventDetails });
+    // Reset form fields after submission
+    setEventName("");
+    setDate("");
+    setTiming("");
+    setPhoto(null);
+    setEventDetails("");
   };
 
   return (
-    <div className="form-container">
+    <div>
+      <h2>Add New Event</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="eventName">Event Name:</label>
           <input
-            className="form-input"
             type="text"
-            id="name"
-            name="name"
-            placeholder='gg'
-            value={formData.name}
-            onChange={handleChange}
+            id="eventName"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
             required
           />
         </div>
         <div>
           <label htmlFor="date">Date:</label>
           <input
-            className="form-input"
             type="date"
             id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             required
           />
         </div>
         <div>
           <label htmlFor="timing">Timing:</label>
           <input
-            className="form-input"
             type="text"
             id="timing"
-            name="timing"
-            value={formData.timing}
-            onChange={handleChange}
+            value={timing}
+            onChange={(e) => setTiming(e.target.value)}
             required
           />
         </div>
-        {/* <div>
+        <div>
           <label htmlFor="photo">Photo:</label>
           <input
-            className="form-input"
             type="file"
             id="photo"
-            name="photo"
             accept="image/*"
-            onChange={handleChange}
-            required
+            onChange={(e) => setPhoto(e.target.files[0])}
           />
-        </div> */}
-        <div>
-          <label htmlFor="timing">Category:</label>
-          {/* <input
-            className="form-input"
-            type="text"
-            id="timing"
-            name="timing"
-            value={formData.timing}
-            onChange={handleChange}
-            required
-          /> */}
-          <select name="category" id="category" className="form-input"
-            value={formData.category}
-            onChange={handleChange}>
-            <option value="none">Select</option>
-            <option value="music">Music</option>
-            <option value="comedy">Comedy</option>
-            <option value="sports">Sports</option>
-            <option value="birthday">Birthday</option>
-          </select>
         </div>
         <div>
-          <label htmlFor="details">Details:</label>
+          <label htmlFor="eventDetails">Event Details:</label>
           <textarea
-            className="form-textarea"
-            id="details"
-            name="details"
-            value={formData.details}
-            onChange={handleChange}
+            id="eventDetails"
+            value={eventDetails}
+            onChange={(e) => setEventDetails(e.target.value)}
             required
           />
         </div>
-        <button className="form-button" type="submit">
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
 };
+
 
 export default CreateEvent;
