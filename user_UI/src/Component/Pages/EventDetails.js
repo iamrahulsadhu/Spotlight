@@ -120,7 +120,7 @@
 //                                             {inviteSuccess && (
 //                                                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 //                                                  <CheckCircleOutline style={{ color: 'green' }} />
-
+                                                
 //                                              </div>
 //                                             )}
 //                                         </div>
@@ -154,14 +154,14 @@ import { CheckCircleOutline } from '@mui/icons-material';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import '../../CSS/Eventdetails.css';
-import Navbar from 'react-bootstrap/Navbar'; // Import Navbar
+import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
-import '../../CSS/Popup.css'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import '../../CSS/Eventdetails.css';
+import '../../CSS/Popup.css'
 
 const EventDetails = ({ eventDetail, invite, ticket }) => {
     const nav=useNavigate();
@@ -172,7 +172,6 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [loading, setLoading] = useState(false); // State for loader
     const { id } = useParams();
-
     useEffect(() => {
         setParamsid(id);
         eventDetail(id);
@@ -206,20 +205,6 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
 
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home"><ArrowBackIcon onClick={() => nav('/Events')}/></Nav.Link> {/* Back icon */}
-                    <Navbar.Brand href="#home" style={{ fontWeight: 'bold', marginLeft: '30px' }}>Spotlight</Navbar.Brand>
-                </Nav>
-                <Nav style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
-                    <Nav.Link href="#profile"><NotificationsIcon /></Nav.Link> {/* Profile icon */}
-                    <span style={{ margin: '0 10px' }}></span> {/* Spacer */}
-                    <Nav.Link href="#message"><EmailIcon /></Nav.Link> {/* Message icon */}
-                    <span style={{ margin: '0 10px' }}></span> {/* Spacer */}
-                    <Nav.Link href="#notification"><AccountCircleIcon onClick={() => nav('/userDashboard')}/></Nav.Link> {/* Notification icon */}
-                </Nav>
-
-            </Navbar>
             <div className='card-container' style={{ marginTop: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <div className="card" style={{ width: '40rem', margin: '10px 20px' }}>
                     <img src={cc} className="card-img-top" alt="..." />
