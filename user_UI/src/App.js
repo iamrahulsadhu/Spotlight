@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Landing from './Component/Landing'
 import Login from './Component/Modal/Login'
 import Signup from './Component/Modal/Signup'
+
 import Event from './Component/Pages/Event'
 import EventDetails from './Component/Pages/EventDetails'
-
 import MyEvent from './Component/Pages/MyEvent'
 import Rsvp from './Component/Pages/Rsvp'
 import Home from './Component/Pages/Home'
