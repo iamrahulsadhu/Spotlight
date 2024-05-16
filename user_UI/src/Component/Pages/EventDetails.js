@@ -19,7 +19,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import EmailIcon from '@mui/icons-material/Email';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import '../../CSS/Eventdetails.css';
-// import '../../CSS/Popup';
+import '../../CSS/Popup.css'
 import { useNavigate } from 'react-router-dom';
 const EventDetails = ({ eventDetail, invite, ticket }) => {
     const nav=useNavigate();
