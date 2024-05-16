@@ -1,17 +1,44 @@
-import React, { useState } from 'react';  
-import {Box, styled } from '@mui/material';
+import React, { useState, useEffect } from 'react';  
+import {Box, styled, TextField, Select, FormControl, InputLabel, MenuItem } from '@mui/material';
+import {LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import {AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import {DatePicker} from '@mui/x-date-pickers/DatePicker'
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
+
 
 
 const FormContainer = styled(Box)`
-width: 400px;
+
+  width: 400px;
   margin: 0 auto;
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+    flex-direction: column;
+`;
+
+const FormHeader = styled(Box)`
+font-size: 30px;
+margin-left: 90px;
 `;
 
 const Insert = () => {
+
+  const [cleared, setCleared] = React.useState(false);
+
+  useEffect(() => {
+    if (cleared) {
+      const timeout = setTimeout(() => {
+        setCleared(false);
+      }, 1500);
+
+      return () => clearTimeout(timeout);
+    }
+    return () => {};
+  }, [cleared]);
+
   const [formData, setFormData] = useState({
     name: '',
     date: '',
@@ -60,12 +87,12 @@ const Insert = () => {
     <div className=" container-fluid">
       <div className="row mt-2 dashboard-row ">
         <FormContainer>
-        <h2>Insert Event</h2>
+          <FormHeader>Insert Event</FormHeader>
           <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name">Name: </label>
-              <input
-                className="form-input"
+
+            <TextField
+                variant='standard'
+                label='Enter Event Name'
                 type="text"
                 id="name"
                 name="name"
@@ -74,43 +101,52 @@ const Insert = () => {
                 onChange={handleChange}
                 required
               />
-            </div>
-            <div>
-              <label htmlFor="date">Date:</label>
-              <input
-                className="form-input"
-                type="date"
-                id="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="timing">Timing:</label>
-              <input
-                className="form-input"
+
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoItem value={formData.date} onChange={handleChange}>
+                <DatePicker
+                  label="Date" 
+                  id="date"
+                  name="date"
+                  required
+                  sx={{ width: 260 }}
+                    slotProps={{
+                      field: { clearable: true, onClear: () => setCleared(true) },
+                    }}
+                />
+              </DemoItem>
+            </LocalizationProvider>
+
+            <TextField
+                variant='standard'
+                label='Timing'
                 type="text"
                 id="timing"
                 name="timing"
+                placeholder='Timing'
                 value={formData.timing}
                 onChange={handleChange}
                 required
               />
-            </div>
-            <div>
-              <label htmlFor="category">Category: </label>
-              <select name="category" id="category"
-                value={formData.category}
-                onChange={handleChange}>
-                <option value="none">Select</option>
-                <option value="music">Music</option>
-                <option value="comedy">Comedy</option>
-                <option value="sports">Sports</option>
-                <option value="birthday">Birthday</option>
-              </select>
-            </div>
+
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="category">Category</InputLabel>
+                <Select
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  label="Age" >
+                  <MenuItem value="none">Select</MenuItem>
+                  <MenuItem value="music">Music</MenuItem>
+                  <MenuItem value="comedy">Comedy</MenuItem>
+                  <MenuItem value="sports">Sports</MenuItem>
+                  <MenuItem value="birthday">Birthday</MenuItem>
+                </Select>
+            </FormControl>
+
+
             <div>
               <label htmlFor="photo">Photo:</label>
               <input
@@ -123,6 +159,7 @@ const Insert = () => {
                 required
               />
             </div>
+
             <div>
               <label htmlFor="details">Details:</label>
               <textarea
@@ -134,6 +171,7 @@ const Insert = () => {
                 required
               />
             </div>
+
             <button className="form-button" type="submit">
               Insert
             </button>
