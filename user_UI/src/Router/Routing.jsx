@@ -19,18 +19,6 @@ const Routing = () => {
     const [updateData, setUpdateData] = useState({});
     const [token, setToken] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    useEffect(() => {
-      const getData = async () => {
-        await axios
-          .get("http://localhost:5000/admin/gettrains")
-          .then((res) => {
-            setData(() => res);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      };
-    }, []);
     const navigate = useNavigate();
     const signup=async(values,setSubmitting)=>{
       try{
@@ -154,66 +142,26 @@ const createEvent=async(formData,id)=>{
     
     // Define a private route component to protect routes
     return (
-        // <Routes>
-        //   <Route path="/" element={<Landing />} /> 
-        //   <Route path="/login" element={<Login login={login}/>} />
-        //   <Route path="/signup" element={<Signup signup={signup}/>} />
-        //   <Route path="/events" element={<Event />} />
-        //   <Route path="/events/event/:id" element={<EventDetails eventDetail={eventDetail} invite={invite}/>} />
-        //   <Route path="/admin" element={<Layout />}>
-        //       {/* <Route path="" element={<Login data={data}/>} /> */}
-        //       <Route path="" element={<Dashboard data={data} />} />
-        //       <Route
-        //         path="/admin/table"
-        //         element={
-        //           <Home
-        //             table={table}
-        //             data={data}
-        //             deleteTrain={deleteTrain}
-        //           />
-        //         }
-        //       />
-        //       <Route
-        //         path="/admin/requests"
-        //         element={
-        //           <Request requests={requests} requestData={requestData} />
-        //         }
-        //       />
-        //       <Route
-        //         path="/admin/insert"
-        //         element={<Insert insertData={insertData} />}
-        //       />
-        //       <Route
-        //         path="/admin/update"
-        //         element={
-        //           <Update
-        //             updateTrainData={updateTrainData}
-        //             updateData={updateData}
-        //           />
-        //         }
-        //       />
-        //     </Route>
-        //     </Routes>
         <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login login={login} />} />
-        <Route path="/signup" element={<Signup signup={signup} />} />
-        <Route path="/events" element={localStorage.getItem("token") ?<Event />: <Navigate to="/login" />}/>
-        {/* Protected route for EventDetails */}
-        <Route
-          path="/events/event/:id"
-          element={localStorage.getItem("token") ? <EventDetails eventDetail={eventDetail} invite={invite} ticket={ticket}/> : <Navigate to="/login" />}
-        />
-        {/* Protected route for admin dashboard */}
-        <Route path=":id"  element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
-          <Route path="" element={<Dashboard data={data}/>} />
-          <Route path="home" element={localStorage.getItem("token") ?<Home /> : <Navigate to="/login" />} />
-          {/* <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} /> */}
-          <Route path="create" element={localStorage.getItem("token") ?<CreateEvent createEvent={createEvent} /> : <Navigate to="/login" />} />
-          <Route path="myevents" element={localStorage.getItem("token") ?<MyEvent/> : <Navigate to="/login" />} />
-          <Route path="rsvp" element={localStorage.getItem("token") ?<Rsvp/> : <Navigate to="/login" />} />
-        </Route>
-      </Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login login={login} />} />
+          <Route path="/signup" element={<Signup signup={signup} />} />
+          <Route path="/events" element={localStorage.getItem("token") ?<Event />: <Navigate to="/login" />}/>
+          {/* Protected route for EventDetails */}
+          <Route
+            path="/events/event/:id"
+            element={localStorage.getItem("token") ? <EventDetails eventDetail={eventDetail} invite={invite} ticket={ticket}/> : <Navigate to="/login" />}
+          />
+          {/* Protected route for admin dashboard */}
+          <Route path=":id"  element={localStorage.getItem("token") ? <Layout logout={logout} /> : <Navigate to="/login" />}>
+            <Route path="" element={<Dashboard data={data}/>} />
+            <Route path="home" element={localStorage.getItem("token") ?<Home /> : <Navigate to="/login" />} />
+            {/* <Route path="requests" element={localStorage.getItem("token") ?<Request requests={requests} requestData={requestData} /> : <Navigate to="/login" />} /> */}
+            <Route path="create" element={localStorage.getItem("token") ?<CreateEvent createEvent={createEvent} /> : <Navigate to="/login" />} />
+            <Route path="myevents" element={localStorage.getItem("token") ?<MyEvent/> : <Navigate to="/login" />} />
+            <Route path="rsvp" element={localStorage.getItem("token") ?<Rsvp/> : <Navigate to="/login" />} />
+          </Route>
+        </Routes>
             )}
           {/* Define nested routes relative to the parent route */}
             {/* <Route path="" element={<Loader/>} />
