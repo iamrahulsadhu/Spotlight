@@ -41,10 +41,10 @@ const Parent = () => {
         marginTop: "5rem"
       }}>
         <Link to={`/${localStorage.getItem("id")}`} className="linkStyle"><FaHome /> Home</Link>
-        <Link to="/user/allevents" ><BsCalendar4Event /> All Events</Link>
-        <Link to="/user/myevents" ><IoTicketOutline /> My Events</Link>
-        <Link to="/user/rsvp" ><FaUserGroup /> RSVP</Link>
-        <Link to="/user/notifications" ><IoIosNotificationsOutline /> Notifications</Link>
+      <Link to={`/${id}/allevents`} ><BsCalendar4Event /> All Events</Link>
+      <Link to={`/${id}/myevents`} ><IoTicketOutline /> My Events</Link>
+      <Link to={`/${id}/rsvp`}><FaUserGroup /> RSVP</Link>
+      <Link to={`/${id}/notifications`} ><IoIosNotificationsOutline /> Notifications</Link>
         <Link to={`/${id}/create`}>Create Event</Link>
         <Link to="/" style={{ marginTop: "18rem" }}>Logout</Link>
         </div>

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 const Layout = () => {
   return (
     <>
-    <div style={{display: "flex"}}>
+    <div style={{display: "flex",flexDirection:'column'}}>
       <div>
         <Parent/>
       </div>
