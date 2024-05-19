@@ -1,8 +1,17 @@
+//  eta BACKUP code
+//  ekhane kichu korbi na
+
+
+
+
+
+
+
 import React, { useState }from "react";
 import { Link } from "react-router-dom";
 import {motion} from "framer-motion";
 
-//icons
+
 import {FaHome} from 'react-icons/fa';
 import { IoMenu } from "react-icons/io5";
 import { IoIosNotificationsOutline } from "react-icons/io";
@@ -28,7 +37,6 @@ const Parent = () => {
           }} style={{
             backgroundColor: "rgb(0,7,61)",
             height: "100vh",
-            // width: "234px",
             color: "white",
             position: "fixed",
             display: "flex",
