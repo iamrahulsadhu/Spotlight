@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {useParams} from 'react-router-dom';
+import "../../../CSS/newEventCreateForm.css"
+
+
 const CreateEvent = ({createEvent}) => {
+
+  //for changing the bg image
+  useLayoutEffect(() => {
+    document.body.style.backgroundImage = "url(https://www.prasidhcaterers.com/wp-content/uploads/2022/06/event-management.jpg)"
+  });
+
+
   const { id } = useParams();
   const [formData, setFormData] = useState({
     name: '',
@@ -55,16 +65,16 @@ const CreateEvent = ({createEvent}) => {
   };
 
   return (
-    <div className="form-container">
+    <div className="formm-container">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
           <input
-            className="form-input"
+            className="formm-input"
             type="text"
             id="name"
             name="name"
-            placeholder='gg'
+            placeholder='Event Name'
             value={formData.name}
             onChange={handleChange}
             required
@@ -73,7 +83,7 @@ const CreateEvent = ({createEvent}) => {
         <div>
           <label htmlFor="date">Date:</label>
           <input
-            className="form-input"
+            className="formm-input"
             type="date"
             id="date"
             name="date"
@@ -85,7 +95,7 @@ const CreateEvent = ({createEvent}) => {
         <div>
           <label htmlFor="timing">Timing:</label>
           <input
-            className="form-input"
+            className="formm-input"
             type="text"
             id="timing"
             name="timing"
@@ -130,7 +140,7 @@ const CreateEvent = ({createEvent}) => {
         <div>
           <label htmlFor="details">Details:</label>
           <textarea
-            className="form-textarea"
+            className="formm-textarea"
             id="details"
             name="details"
             value={formData.details}
@@ -138,7 +148,7 @@ const CreateEvent = ({createEvent}) => {
             required
           />
         </div>
-        <button className="form-button" type="submit">
+        <button className="formm-button" type="submit">
           Submit
         </button>
       </form>
