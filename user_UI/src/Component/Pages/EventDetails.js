@@ -25,7 +25,8 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
     const nav=useNavigate();
     const [paramsid, setParamsid] = useState()
     const [show, setShow] = useState(false);
-    const [mail, setMail] = useState("")
+    const [mail, setMail] = useState("");
+    const [emailName, setEmailName] = useState("")
     const [inviteSuccess, setInviteSuccess] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [loading, setLoading] = useState(false); // State for loader
@@ -42,12 +43,24 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
     const handleChange=(e)=>{
                setMail(e.target.value)
    }
+   const handleEmailChange=(e)=>{
+    setEmailName(e.target.value)
+}
     const closePopup = () => {
         setShowPopup(false);
     };
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const sendTicket=()=>{
+        try {
+            console.log(emailName);
+            ticket(emailName);
+            handleClose();
+        } catch (error) {
+            alert(error.message) 
+        }
+      
+    }
     const handleSendInvite = () => {
         setLoading(true); // Show loader when sending invite
 
@@ -72,8 +85,8 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                     <Nav.Link href="#profile"><NotificationsIcon /></Nav.Link> {/* Profile icon */}
                     <span style={{ margin: '0 10px' }}></span> {/* Spacer */}
                     <Nav.Link href="#message"><EmailIcon /></Nav.Link> {/* Message icon */}
-                    <span style={{ margin: '0 10px' }}></span> {/* Spacer */}
-                    <Nav.Link href="#notification"><AccountCircleIcon onClick={() => nav('/userDashboard')}/></Nav.Link> {/* Notification icon */}
+                    <span style={{ margin:  '0 10px' }}></span> {/* Spacer */}
+                    <Nav.Link><AccountCircleIcon onClick={() => nav(`/${localStorage.getItem("id")}`)}/></Nav.Link> {/* Notification icon */}
                 </Nav>
 
             </Navbar>
@@ -174,6 +187,8 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                                                         <Form.Label style={{marginTop:'10px'}}>Email</Form.Label>
                                                         <Form.Control
                                                             type="email"
+                                                            value={emailName}
+                                                            onChange={handleEmailChange}
                                                             placeholder="name@example.com"
                                                             autoFocus
                                                             style={{marginTop:'5px'}}
@@ -192,8 +207,8 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                                                 <Button variant="secondary" onClick={handleClose}>
                                                     Close
                                                 </Button>
-                                                <Button variant="primary" style={{width:'30%'}} onClick={handleClose}>
-                                                    Save Changes
+                                                <Button variant="primary" style={{width:'30%'}} onClick={sendTicket}>
+                                                    Send Ticket
                                                 </Button>
                                             </Modal.Footer>
                                         </Modal>

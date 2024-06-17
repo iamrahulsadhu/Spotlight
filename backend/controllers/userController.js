@@ -47,6 +47,15 @@ class User{
           res.status(500).send({ err: err.message });
         }
       };
+    static eventDetails=async(req,res)=>{
+        try {
+          const id=req.params.id;
+            const data=await user.findOne({_id:id},{myevents:1,_id:0}).populate("myevents");
+            res.status(200).send({data})
+        } catch (err) {
+            res.status(400).send({err:err.message})
+        }
+    }
 }
 
 module.exports=User;

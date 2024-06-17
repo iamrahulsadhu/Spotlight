@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState,useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,9 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal'; // Import Modal component
-import { TableVirtuoso } from 'react-virtuoso';
-
+import Modal from '@mui/material/Modal';
+import {TableVirtuoso} from 'react-virtuoso';
+import {useParams} from 'react-router-dom';
+import axios from 'axios';
 const sample = [
   ['Frozen yoghurt', 159, 6.0, 24, 4.0],
   ['Ice cream sandwich', 237, 9.0, 37, 4.3],
@@ -95,41 +97,84 @@ function fixedHeaderContent() {
 }
 
 export default function ReactVirtualizedTable() {
+  let response;
+  const [responseData, setResponse] = useState([])
+  const [valid, setValid] = useState(false)
+  const [dataId,setId] = useState("")
+  const [mail,setEmail] = useState("")
+  const { id } = useParams();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:4000/userevents/${id}`);
+        response=res.data.data.myevents;
+        console.log(res.data.data.myevents);  // log the fetched data instead of the state
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    fetchData().then(()=>{
+      if(response)
+        {
+          console.log(response);
+          setResponse(response)
+          setValid(true)
+        }
+
+    }).catch((err)=>{
+      console.log(err.message);
+    });
+  }, []);
+
   const [open, setOpen] = React.useState(false); // State for modal visibility
 
-  const handleInviteClick = () => {
+  const handleInviteClick = (id) => {
+    setId(id);
     setOpen(true); // Open the modal upon clicking the "Invite" button
   };
 
+  const handleChange=(e)=>{
+    setEmail(e.target.value);
+  }
   const handleClose = () => {
+    setId("");
     setOpen(false); // Close the modal
   };
-
+const sendInvitation=async()=>{
+  try {
+    const res = await axios.post(`http://localhost:4000/invite/${dataId}`,{mail});
+    setOpen(false); // Close the modal
+    // log the fetched data instead of the state
+  } catch (err) {
+    console.log(err.message);
+  }
+}
   return (
-    <Paper style={{ height: 400, width: 600, margin: '0 auto' }}>
-      <TableVirtuoso
-        data={rows}
-        components={VirtuosoTableComponents}
-        fixedHeaderContent={fixedHeaderContent}
-        itemContent={(index, row) => (
-          <React.Fragment>
-            {columns.map((column) => (
-              <TableCell
-                key={column.dataKey}
-                align={column.numeric || false ? 'right' : 'left'}
-              >
-                {row[column.dataKey]}
-              </TableCell>
-            ))}
-            <TableCell align="center">
-              <Button variant="contained" color="primary" onClick={handleInviteClick}>
+    <>
+    <table border="1"  className="col-8" style={{ height: 400, width: 600, margin: '0 auto' }}>
+      <thead>
+        <tr>
+          <th>Header 1</th>
+          <th>Header 2</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {valid && responseData.map((data) => (
+          <tr key={data.id}>
+              <td>{data.name}</td>
+            <td align="center">
+              <Button variant="contained" color="primary" onClick={()=>{handleInviteClick(data._id)}}>
                 Invite
               </Button>
-            </TableCell>
-          </React.Fragment>
-        )}
-      />
-      {/* Modal */}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    //   {/* Modal */}
+    <Paper className='col-8'  style={{ height: 400, width: 600, margin: '0 auto' }}>
       <Modal
         open={open}
         onClose={handleClose}
@@ -139,14 +184,15 @@ export default function ReactVirtualizedTable() {
         <Paper style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: 32 }}>
           <h2 id="modal-title">Invite Modal</h2>
           Name <input type='text' placeholder='Name' id='name' style={{ borderRadius: '10px', border: '0.5px solid black', marginBottom: '10px', color: 'black' }} />
-          Email <input type='email' placeholder='Email' id='email'  style={{ borderRadius: '10px', border: '0.5px solid black', marginBottom: '10px', color: 'black' }} />
+          Email <input type='email' placeholder='Email' id='email' value={mail} onChange={handleChange}style={{ borderRadius: '10px', border: '0.5px solid black', marginBottom: '10px', color: 'black' }} />
           <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
-          <Button onClick={handleClose}>Send</Button>
+          <Button onClick={sendInvitation}>Send</Button>
           <Button onClick={handleClose}>Close</Button>
           </div>
          
         </Paper>
       </Modal>
     </Paper>
+    </>
   );
 }

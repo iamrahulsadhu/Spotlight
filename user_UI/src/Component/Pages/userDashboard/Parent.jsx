@@ -10,7 +10,7 @@ const Parent = () => {
   return (
     <>
     <div>
-      <div className="col-12 side-nav" style={{
+      <div className="col-4 side-nav" style={{
         backgroundColor: "#000066",
         flexDirection: "column",
         display: "flex",
