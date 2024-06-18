@@ -65,22 +65,25 @@ function Login({login}) {
                     {formik.touched.password && formik.errors.password ? (
                         <div>{formik.errors.password}</div>
                     ) : null}
-                    <div className="rememberBox">
                         <div className="remember">
                             <input
                                 type="checkbox"
                                 id="rememberMe"
                                 name="rememberMe"
+                                className="checkedbox"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 checked={formik.values.rememberMe}
                             />
                             <label htmlFor="rememberMe">Remember me</label>
                         </div>
-                        <a href="http://">Forget Password</a>
-                    </div>
+
 
                     <button type="submit" style={{width:'100%'}}>Login</button>
+                    
+                    <div className="rememberBox">
+                        <a href="http://">Forget Password</a>
+                    </div>
 
                     <div className="newAccount">
                         Don't have an account ? <a href="http://">Sign up</a>

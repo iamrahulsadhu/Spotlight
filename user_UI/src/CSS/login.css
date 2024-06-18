@@ -111,11 +111,28 @@ h4::after {
     color: red;
 }
 
+
+.remember {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+}
+
+.checkedbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    width: 17px;
+    height: 17px;
+}
+
 .rememberBox {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: smaller;
+    font-size: 15px;
     color: white;
 }
 
@@ -134,9 +151,10 @@ button {
 }
 
 .newAccount {
-    font-size: smaller;
+    font-size: 15px;
     color: rgb(0, 14, 5);
 }
+
 .error {
     color: red;
     font-size: smaller;
