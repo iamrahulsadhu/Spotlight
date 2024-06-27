@@ -20,18 +20,17 @@ const Parent = () => {
 
   return (
     <>
-      <motion.div
-        animate={{
-          width: isOpen ? "234px" : "55px",
-          transition: {
-            duration: 0.5,
-            type: "spring",
-            damping: 10,
-          },
-        }}
-        style={{
-          backgroundColor: "rgb(0,7,61)",
-          height: "100vh",
+    <div>
+      <div className="col-4 side-nav" style={{
+        backgroundColor: "#000066",
+        flexDirection: "column",
+        display: "flex",
+        alignItems: "center",
+        height: "100%",
+        margin: "0",
+        padding: "0"
+      }}>
+        <div className="titlee" style={{
           color: "white",
           position: "fixed",
           display: "flex",
