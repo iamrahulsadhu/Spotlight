@@ -21,9 +21,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import '../../CSS/Eventdetails.css';
 import '../../CSS/Popup.css'
 import { useNavigate } from 'react-router-dom';
-const EventDetails = ({ eventDetail, invite, ticket }) => {
+import axios from 'axios';
+const EventDetails = ({invite, ticket }) => {
     const nav=useNavigate();
     const [paramsid, setParamsid] = useState()
+    const [data, setData] = useState([])
     const [show, setShow] = useState(false);
     const [mail, setMail] = useState("");
     const [emailName, setEmailName] = useState("")
@@ -36,7 +38,17 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
         eventDetail(id);
         console.log(id);
     }, [])
-
+    const eventDetail=async(id)=>{
+        try {
+          let dbData;
+          dbData=await axios.get(`http://localhost:4000/eventdetails/${id}`)
+          setData(dbData.data.data);
+        //   setFilterData (dbData.data.data);
+          // setFilterData(dbData.data.data)
+        } catch (err) {
+          console.log(err.message);
+        }
+      }
     const openPopup = () => {
         setShowPopup(true);
     };
@@ -51,16 +63,28 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
     };
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const sendTicket=()=>{
+    const sendTicket=async()=>{
         try {
-            console.log(emailName);
+            const response = await fetch('http://localhost:4000/generate-pdf');
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'qr-code.pdf';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } else {
+                alert('Failed to download PDF');
+            }
             ticket(emailName);
             handleClose();
         } catch (error) {
             alert(error.message) 
         }
-      
-    }
+      }
     const handleSendInvite = () => {
         setLoading(true); // Show loader when sending invite
 
@@ -92,10 +116,10 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
             </Navbar>
             <div className='card-container' style={{ marginTop: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <div className="card" style={{ width: '40rem', margin: '10px 20px' }}>
-                    <img src={cc} className="card-img-top" alt="..." />
+                    <img src={data.image} className="card-img-top" alt="..." />
                     <div className="card-body">
                         <p className="card-text" style={{ textAlign: 'left', fontSize: '30px', borderBottom: '1px solid #808080' }}>About</p>
-                        <p className='card2-text' style={{ textAlign: 'left' }}>vsdvvdfvlkniyfbojsbvc8yhsbfihbsiybfks ciyb</p>
+                        <p className='card2-text' style={{ textAlign: 'left' }}>{data.details}</p>
                     </div>
                     <div className='card-body2' style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginTop: '10px' }}>
                         <div style={{ alignSelf: 'flex-start' }}>
@@ -106,11 +130,11 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                 <div className="card" style={{ width: '25rem', margin: '10px 20px' }}>
 
                     <div className="card-body">
-                        <p className="card-text" style={{ textAlign: 'left', fontSize: '30px', borderBottom: '1px solid #808080' }}>Standup Comedy:1</p>
+                        <p className="card-text" style={{ textAlign: 'left', fontSize: '30px', borderBottom: '1px solid #808080' }}>{data.eventName}</p>
                         <div className='icons' style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
                                 <EventSeatIcon style={{ marginLeft: '10px' }} />
-                                <p>Comedy</p>
+                                <p>{data.category}</p>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
                                 <AccessTimeIcon style={{ marginLeft: '10px' }} />
@@ -122,7 +146,7 @@ const EventDetails = ({ eventDetail, invite, ticket }) => {
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
                                 <CalendarMonthIcon style={{ marginLeft: '10px' }} />
-                                <p>Thu 22 Jun 2024, 16:00</p>
+                                <p>{data.date}</p>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}>
                                 <LocationOnIcon style={{ marginLeft: '10px' }} />

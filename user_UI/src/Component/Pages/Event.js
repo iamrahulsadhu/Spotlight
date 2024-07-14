@@ -25,7 +25,6 @@ import Music from '../../assets/musicevent.jpg'
 import Thrill from '../../assets/thrillerevents.jpg'
 import Action from '../../assets/actionevents.jpg'
 import Sport from '../../assets/sportsevents.png'
-import Comedy from '../../assets/comedyevents.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useEffect,useState} from 'react';
 import axios from 'axios';
@@ -206,14 +205,14 @@ function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
         <IconButton
           size="large"
@@ -250,7 +249,7 @@ function PrimarySearchAppBar() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ padding: 0, margin: 0 }}
+            sx={{ padding: 0, margin: 0,width:'6vw'}}
           >
             <MenuIcon />
           </IconButton>
@@ -271,9 +270,9 @@ function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1,marginRight:"20vw"}} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
@@ -286,7 +285,7 @@ function PrimarySearchAppBar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
@@ -323,6 +322,18 @@ export default function App() {
   const [data, setData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [displayCount, setDisplayCount] = useState(6);
+  const navigate=useNavigate();
+  const [isHovered, setIsHovered] = React.useState(false);
+  const handleClick=(id)=>{
+    navigate(`/events/event/${id}`)
+  }
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 let dbData;
 useEffect(() => {
   fetchEvents();
@@ -330,7 +341,6 @@ useEffect(() => {
 const handleSeeMore = () => {
   setDisplayCount(prevCount => prevCount + 6);
 };
-
 const fetchEvents=async()=>{
   try {
     const headers = {
@@ -389,9 +399,9 @@ const handleCategorySelect = (category) => {
      setData(filter)
        break;
      }
-     case 'thriller':{
+     case 'exibition':{
       let filter=filterData.filter((e)=>{
-      return e.category=='thriller';
+      return e.category=='exibition';
       })
       console.log(filter);
      setDisplayCount(6);
@@ -403,69 +413,86 @@ const handleCategorySelect = (category) => {
   }
     // Handle category selection logic here, like filtering content
   };
-
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '30vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '30vh',padding:'0px 20px'}}>
       <PrimarySearchAppBar />
       <Box sx={{ flexGrow: 1, padding: 3 }}>
-        <CategoryFilter>
-          <CategoryButton
+        <CategoryFilter className='ul'>
+          <CategoryButton className='li'
             selected={selectedCategory === 'all'}
             variant={selectedCategory === 'all' ? 'h6' : 'body1'}
             onClick={() => handleCategorySelect('all')}
           >
             All
           </CategoryButton>
-          <CategoryButton
+          <CategoryButton className='li'
             selected={selectedCategory === 'music'}
             variant={selectedCategory === 'music' ? 'h6' : 'body1'}
             onClick={() => handleCategorySelect('music')}
           >
             Music
           </CategoryButton>
-          <CategoryButton
-            selected={selectedCategory === 'action'}
-            variant={selectedCategory === 'action' ? 'h6' : 'body1'}
-            onClick={() => handleCategorySelect('action')}
+          {/* <CategoryButton className='li'
+            selected={selectedCategory === 'wedding'}
+            variant={selectedCategory === 'wedding' ? 'h6' : 'body1'}
+            onClick={() => handleCategorySelect('wedding')}
           >
-            Action
-          </CategoryButton>
-          <CategoryButton
+            Wedding
+          </CategoryButton> */}
+          <CategoryButton className='li'
             selected={selectedCategory === 'sports'}
             variant={selectedCategory === 'sports' ? 'h6' : 'body1'}
             onClick={() => handleCategorySelect('sports')}
           >
             Sports
           </CategoryButton>
-          <CategoryButton
+          <CategoryButton className='li'
             selected={selectedCategory === 'comedy'}
             variant={selectedCategory === 'comedy' ? 'h6' : 'body1'}
             onClick={() => handleCategorySelect('comedy')}
           >
             Comedy
           </CategoryButton>
-          <CategoryButton
-            selected={selectedCategory === 'thriller'}
-            variant={selectedCategory === 'thriller' ? 'h6' : 'body1'}
-            onClick={() => handleCategorySelect('thriller')}
+          <CategoryButton className='filter'
+            selected={selectedCategory === 'exibition'}
+            variant={selectedCategory === 'exibition' ? 'h6' : 'body1'}
+            onClick={() => handleCategorySelect('exibition')}
           >
-            Thriller
+            Exibition
           </CategoryButton>
         </CategoryFilter>
         <Grid container spacing={3}>
+        <div class="container1">
+        <div class="content ">
   {data.length > 0 && (
    data.slice(0, displayCount).map((e) => (
       <React.Fragment key={e.eventName}>
-        <ContentItem
+        {/* <ContentItem sx={{height:'20vh'}}
           title={e.eventName}
-          image={Events}
+          image={e.image}
           description={e.details}
           category={e.category}
           id={e._id}
-        />
+        /> */}
+       
+          <div className="content-item" onClick={()=>{handleClick(e._id)}}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}  style={{
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease', // Increase scale on hover
+          boxShadow: isHovered
+            ? '0 4px 8px rgba(0, 0, 0, 0.2)'
+            : '0 2px 4px rgba(0, 0, 0, 0.1)', // Change box-shadow on hover
+        }}>
+      <h2 className="content-item-title">{e.name}</h2>
+      <img src={e.image} alt={e.name} className="content-item-image"/>
+      <p className="content-item-description">{e.details.slice(0,30)}....</p>
+      <p className="content-item-category">Category: {e.category}</p>
+    </div>
       </React.Fragment>
     ))
   )}
+   </div>
+   </div>
   {data.length > displayCount && (
     <Box sx={{ textAlign: 'center', marginTop: 3, width:'100%',marginLeft:'25px' }}>
       {/* <Button variant="outlined" onClick={handleSeeMore}></Button> */}

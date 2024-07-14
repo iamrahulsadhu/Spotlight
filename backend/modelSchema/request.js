@@ -25,7 +25,7 @@ const request=mongoose.Schema({
      },
      category: {
       type: String,
-      enum: ["music","sports","comedy","birthday"]
+      enum: ["music","sports","comedy","exibition"]
     }
 })
 module.exports=mongoose.model("request",request);

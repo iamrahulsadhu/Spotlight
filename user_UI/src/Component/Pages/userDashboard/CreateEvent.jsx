@@ -124,7 +124,7 @@ const CreateEvent = ({createEvent}) => {
             <option value="music">Music</option>
             <option value="comedy">Comedy</option>
             <option value="sports">Sports</option>
-            <option value="birthday">Birthday</option>
+            <option value="exibition">Exibition</option>
           </select>
         </div>
         <div>

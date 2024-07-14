@@ -27,22 +27,25 @@ static addEvent=async(req,res)=>{
           category,
           date,
           timing,
-          photo,
           details,id}=req.body;
         try {
+          console.log(category);
             const data=await request.create({name,
               category,
               date,
+              date,
               timing,
-              photo,
               details,
               creatorId:id});
+          console.log(category);
             // admin.requests.push(data._id);
             await admin.updateOne({userName:"Admin"},
               { $push: { requests: data._id } })
           //  await admin.save();
+          console.log(data);
             res.status(200).send({data})
-        } catch (err) {
+          }
+         catch (err) {
             res.status(400).send({err:err.message})
         }
     }
@@ -75,124 +78,106 @@ static manyevent=async(req,res)=>{
         try {
             const data=await event.create([
                 {
-                  "eventName": "Concert in the Park",
-                  "timing": "2024-04-20T18:00:00Z",
+                  "name": "Concert in the Park",
+                  "date": "2024-04-20TZ",
                   "details": "Live music performance by local bands.",
-                  "category": "music"
+                  "timing":"2:00 Pm",
+                  "category": "music",
+                  "image":"https://img.freepik.com/free-psd/urban-music-banner-template_23-2149078120.jpg?w=1380&t=st=1720901628~exp=1720902228~hmac=1e3dc7359abc53445b81adda9d345dd5a13af832ae30933256239e12c6824d11"
                 },
                 {
-                  "eventName": "John's Birthday Bash",
-                  "timing": "2024-05-10T20:00:00Z",
-                  "details": "Celebrating John's 30th birthday with friends and family.",
-                  "category": "birthday"
-                },
-                {
-                  "eventName": "Football Match: Team A vs Team B",
-                  "timing": "2024-04-25T15:30:00Z",
+                  "name": "Football Match: Team A vs Team B",
+                  "date": "2024-04-25T",      "timing":"4:00 PM",
                   "details": "Intense showdown between two top teams.",
-                  "category": "sports"
+                  "category": "sports",
+                 "image":"https://img.freepik.com/free-psd/gym-fitness-web-banner-template_106176-660.jpg?w=1380&t=st=1720963618~exp=1720964218~hmac=b7d3c126318e418e085ce1899bc35c8833a3412c988dd74a7f1bdcb5bba934bf"
                 },
                 {
-                  "eventName": "Jazz Night at the Club",
-                  "timing": "2024-04-18T21:00:00Z",
+                  "name": "Jazz Night at the Club",
+                  "date": "2024-04-18T",      "timing":"4:00 PM",
                   "details": "Smooth jazz tunes all night long.",
-                  "category": "music"
+                  "category": "music",
+                        "image":"https://img.freepik.com/free-vector/gradient-electronic-music-facebook-cover_23-2149913287.jpg?w=1380&t=st=1720901934~exp=1720902534~hmac=34100cef62c0b61895a5b85e3b96013fa4a94b828fc2739bc0938bd23e632ae4"
                 },
                 {
-                  "eventName": "Sarah's Sweet 16 Party",
-                  "timing": "2024-06-05T16:00:00Z",
-                  "details": "A glamorous celebration for Sarah's milestone birthday.",
-                  "category": "birthday"
-                },
-                {
-                  "eventName": "Basketball Playoff Finals",
-                  "timing": "2024-05-15T19:00:00Z",
+                  "name": "Basketball Playoff Finals",
+                  "date": "2024-05-15T",      "timing":"4:00 PM",
                   "details": "The culmination of the season, who will emerge victorious?",
-                  "category": "sports"
+                  "category": "sports",
+                  "image":"https://img.freepik.com/free-psd/basketball-banner-concept_23-2148663869.jpg?w=1380&t=st=1720963706~exp=1720964306~hmac=d6da52ae68e30bf2446f6d021bf56d33838733087dae7315ba12ab47d7d0d75a"
                 },
                 {
-                  "eventName": "Rock Music Festival",
-                  "timing": "2024-07-20T12:00:00Z",
+                  "name": "Rock Music Festival",
+                  "date": "2024-07-20T",      "timing":"4:00 PM",
                   "details": "An electrifying lineup of rock bands from around the world.",
-                  "category": "music"
+                  "category": "music",
+                        "image":"https://img.freepik.com/free-vector/gradient-electronic-music-facebook-cover_23-2149913287.jpg?w=1380&t=st=1720901934~exp=1720902534~hmac=34100cef62c0b61895a5b85e3b96013fa4a94b828fc2739bc0938bd23e632ae4"
                 },
                 {
-                  "eventName": "Grandma's 80th Birthday Celebration",
-                  "timing": "2024-04-30T14:00:00Z",
-                  "details": "A heartwarming gathering to honor Grandma's milestone birthday.",
-                  "category": "birthday"
-                },
-                {
-                  "eventName": "Tennis Exhibition Match",
-                  "timing": "2024-05-05T11:00:00Z",
+                  "name": "Tennis Exhibition Match",
+                  "date": "2024-05-05T",      "timing":"4:00 PM",
                   "details": "Top players showcasing their skills in an exciting exhibition match.",
-                  "category": "sports"
+                  "category": "sports",
+                  "image":"https://marketplace.canva.com/EAEQpf33FmU/2/0/1600w/canva-yellow-and-black-photo-classic-maximalist-sports-football-event-banner-F9DE5sqa4fM.jpg"
                 },
                 {
-                  "eventName": "Electronic Dance Music Party",
-                  "timing": "2024-06-15T22:00:00Z",
+                  "name": "Electronic Dance Music Party",
+                  "date": "2024-06-15T",      "timing":"4:00 PM",
                   "details": "An immersive experience with pulsating beats and dazzling visuals.",
-                  "category": "music"
+                  "category": "music",
+                        "image":"https://img.freepik.com/free-vector/gradient-electronic-music-facebook-cover_23-2149913287.jpg?w=1380&t=st=1720901934~exp=1720902534~hmac=34100cef62c0b61895a5b85e3b96013fa4a94b828fc2739bc0938bd23e632ae4"
                 },
                 {
-                  "eventName": "Mike's Surprise Birthday Party",
-                  "timing": "2024-05-18T19:00:00Z",
-                  "details": "Keeping it a secret for a memorable surprise!",
-                  "category": "birthday"
-                },
-                {
-                  "eventName": "Soccer Friendly Match: City FC vs Town United",
-                  "timing": "2024-05-08T16:30:00Z",
+                  "name": "Soccer Friendly Match: City FC vs Town United",
+                  "date": "2024-05-08T",      "timing":"4:00 PM",
                   "details": "A friendly match promoting sportsmanship and camaraderie.",
-                  "category": "sports"
+                  "category": "sports",
+                  "image":"https://img.freepik.com/free-psd/sport-event-banner-template_23-2148947929.jpg"
                 },
                 {
-                  "eventName": "Classical Music Recital",
-                  "timing": "2024-06-25T17:00:00Z",
+                  "name": "Classical Music Recital",
+                  "date": "2024-06-25T",      "timing":"4:00 PM",
                   "details": "Talented musicians performing timeless classics.",
-                  "category": "music"
+                  "category": "music",
+                  "image":"https://img.freepik.com/free-psd/banner-template-techno-music-night-party_23-2148815177.jpg?w=1380&t=st=1720902007~exp=1720902607~hmac=0a53690e734b6ed2eddc901a877e527bc444943a63e0b4f5fb424aef3165b22a"
                 },
                 {
-                  "eventName": "Family Picnic for Dad's Birthday",
-                  "timing": "2024-05-12T12:00:00Z",
-                  "details": "Enjoying outdoor fun and delicious food in honor of Dad.",
-                  "category": "birthday"
-                },
-                {
-                  "eventName": "Golf Charity Tournament",
-                  "timing": "2024-06-08T08:00:00Z",
+                  "name": "Golf Charity Tournament",
+                  "date": "2024-06-08T",      "timing":"4:00 PM",
                   "details": "Raising funds for a noble cause while enjoying a round of golf.",
-                  "category": "sports"
+                  "category": "sports",
+                           "image":"https://img.freepik.com/free-psd/basketball-banner-concept_23-2148663869.jpg?w=1380&t=st=1720963706~exp=1720964306~hmac=d6da52ae68e30bf2446f6d021bf56d33838733087dae7315ba12ab47d7d0d75a"
                 },
                 {
-                  "eventName": "Folk Music Night at the Cafe",
-                  "timing": "2024-05-30T19:30:00Z",
+                  "name": "Folk Music Night at the Cafe",
+                  "date": "2024-05-30T",
                   "details": "Soothing melodies and heartwarming tunes to unwind.",
-                  "category": "music"
+                  "category": "music",      "timing":"4:00 PM",
+                  "image":"https://img.freepik.com/free-psd/music-channel-template-design_23-2151387439.jpg?w=996&t=st=1720902038~exp=1720902638~hmac=a9833805d2864b8d27644d8ee82e60ff7ba363532855981fb1775021353745b8"
                 },
                 {
-                  "eventName": "Sweet 18th Birthday Party for Lisa",
-                  "timing": "2024-07-05T17:00:00Z",
-                  "details": "Marking Lisa's transition into adulthood with style and grace.",
-                  "category": "birthday"
-                },
-                {
-                  "eventName": "Baseball League Championship",
-                  "timing": "2024-06-20T20:00:00Z",
+                  "name": "Baseball League Championship",
+                  "date": "2024-06-20T",
+                  "timing":"4:00 PM",      "timing":"4:00 PM",
                   "details": "The climax of the season, who will claim the title?",
-                  "category": "sports"
+                  "category": "sports",
+                 "image":"https://img.freepik.com/free-psd/gym-fitness-web-banner-template_106176-660.jpg?w=1380&t=st=1720963618~exp=1720964218~hmac=b7d3c126318e418e085ce1899bc35c8833a3412c988dd74a7f1bdcb5bba934bf"
                 },
                 {
-                  "eventName": "Pop Music Concert",
-                  "timing": "2024-07-10T21:00:00Z",
+                  "name": "Pop Music Concert",
+                  "date": "2024-07-10T",
+                  "timing":"4:00 PM",
                   "details": "Chart-topping hits and energetic performances to get the crowd moving.",
-                  "category": "music"
+                  "category": "music",
+                  "image":"https://img.freepik.com/free-psd/music-event-banner-template_23-2148925044.jpg?w=1380&t=st=1720902062~exp=1720902662~hmac=ac3481c12f6e534b49353d2c88891afad4e3c8ae962c3b2befc65cbcde66be26"
                 },
                 {
-                  "eventName": "Surfing Competition",
-                  "timing": "2024-08-15T07:00:00Z",
+                  "name": "Surfing Competition",
+                  "date": "2024-08-15T",
+                  "timing":"4:00 PM",
                   "details": "Riders battling the waves for glory in this thrilling competition.",
-                  "category": "sports"
+                  "category": "sports",
+                           "image":"https://img.freepik.com/free-psd/basketball-banner-concept_23-2148663869.jpg?w=1380&t=st=1720963706~exp=1720964306~hmac=d6da52ae68e30bf2446f6d021bf56d33838733087dae7315ba12ab47d7d0d75a"
                 }
               ]
               );

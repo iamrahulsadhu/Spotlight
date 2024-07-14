@@ -106,13 +106,14 @@ const ticket=async(emailName)=>{
   });
 }
 const createEvent=async(formData,id)=>{
+  console.log("h jxh");
   const { 
   name,
   category,
   date,
   timing,
-  photo,
   details}=formData;
+  console.log(category);
   await axios
   .post("http://localhost:4000/eventadd",{ name,
   category,
