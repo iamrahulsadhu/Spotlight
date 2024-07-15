@@ -66,8 +66,9 @@ function Login({login}) {
                         <div>{formik.errors.password}</div>
                     ) : null}
                     <div className="rememberBox">
-                        <div className="remember">
-                            <input
+                        <div className="remember d-flex" style={{ alignItems: 'center',
+  gap: '8px' }}>
+                            <input style={{height:'20px'}}
                                 type="checkbox"
                                 id="rememberMe"
                                 name="rememberMe"
@@ -77,7 +78,6 @@ function Login({login}) {
                             />
                             <label htmlFor="rememberMe">Remember me</label>
                         </div>
-                        <a href="http://">Forget Password</a>
                     </div>
 
                     <button type="submit" style={{width:'100%'}}>Login</button>

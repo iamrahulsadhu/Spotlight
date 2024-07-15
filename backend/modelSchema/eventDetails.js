@@ -11,16 +11,20 @@ const event=mongoose.Schema({
       type:String,
       required:true,
    },
-     timing:{
-        type:String
-     },
+   timing:{
+      type:String,
+      required:true,
+   },
+   image:{
+      type:String
+   },
      details:{
         type:String,
         required:true
      },
      category: {
       type: String,
-      enum: ["music","sports","comedy","birthday"]
+      enum: ["music","sports","comedy","exibition"]
     }
 })
 module.exports=mongoose.model("event",event);

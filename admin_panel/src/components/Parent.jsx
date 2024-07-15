@@ -35,9 +35,9 @@ const Parent = () => {
                 >
                   <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5zM3 12v-2h2v2zm0 1h2v2H4a1 1 0 0 1-1-1zm3 2v-2h3v2zm4 0v-2h3v1a1 1 0 0 1-1 1zm3-3h-3v-2h3zm-7 0v-2h3v2z" />
                 </svg>
-               <span className="ms-3">Table</span>
+               <span className="ms-3">Request</span>
               </li></Link>
-              <Link to="/admin/insert" className="linkStyle"><li className="nav-items col-12">
+              {/* <Link to="/admin/insert" className="linkStyle"><li className="nav-items col-12">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -63,7 +63,7 @@ const Parent = () => {
                   <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                 </svg>
                 <span className="ms-3">Update</span>
-              </li></Link>
+              </li></Link> */}
               <Link to="/" className="linkStyle"><li className="btn btn-danger col-12 text-align-justify">
               <svg
                   xmlns="http://www.w3.org/2000/svg"

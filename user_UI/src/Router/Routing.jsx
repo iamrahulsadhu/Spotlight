@@ -92,10 +92,10 @@ const invite=async(id,mail)=>{
     console.log(err.message);
   });
 }
-const ticket=async()=>{
-  console.log("kjdcui");
+const ticket=async(emailName)=>{
+  console.log(emailName);
   await axios
-  .get(`http://localhost:4000/ticket`)
+  .post(`http://localhost:4000/ticket`,{emailName})
   .then((res) => {
     console.log(res.data.data);
     requestData = res.data.data;
@@ -106,13 +106,14 @@ const ticket=async()=>{
   });
 }
 const createEvent=async(formData,id)=>{
+  console.log("h jxh");
   const { 
   name,
   category,
   date,
   timing,
-  photo,
   details}=formData;
+  console.log(category);
   await axios
   .post("http://localhost:4000/eventadd",{ name,
   category,
