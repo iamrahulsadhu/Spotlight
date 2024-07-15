@@ -60,7 +60,7 @@ const CreateEvent = ({createEvent}) => {
         <div>
           <label htmlFor="name">Name:</label>
           <input
-            className="form-input"
+            className="form-input"style={{color:"black"}}
             type="text"
             id="name"
             name="name"
@@ -73,7 +73,7 @@ const CreateEvent = ({createEvent}) => {
         <div>
           <label htmlFor="date">Date:</label>
           <input
-            className="form-input"
+            className="form-input"style={{color:"black"}}
             type="date"
             id="date"
             name="date"
@@ -85,7 +85,7 @@ const CreateEvent = ({createEvent}) => {
         <div>
           <label htmlFor="timing">Timing:</label>
           <input
-            className="form-input"
+            className="form-input" style={{color:"black"}}
             type="text"
             id="timing"
             name="timing"
@@ -118,7 +118,7 @@ const CreateEvent = ({createEvent}) => {
             required
           /> */}
           <select name="category" id="category" className="form-input"
-            value={formData.category}
+            value={formData.category}style={{color:"black"}}
             onChange={handleChange}>
             <option value="none">Select</option>
             <option value="music">Music</option>

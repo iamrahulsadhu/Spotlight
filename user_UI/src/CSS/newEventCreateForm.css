@@ -8,6 +8,7 @@
   }
   
   .form-input {
+    color: black;
     appearance: none;
     border: 1px solid #d1d5db;
     border-radius: 0.25rem;

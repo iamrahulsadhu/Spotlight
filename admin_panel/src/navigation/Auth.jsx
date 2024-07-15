@@ -167,17 +167,17 @@ const Auth = () => {
                 />
               }
             />
-            <Route
+            {/* <Route
               path="/admin/requests"
               element={
                 <Request requests={requests} requestData={requestData} />
               }
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/admin/insert"
               element={<Insert insertData={insertData} />}
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/admin/update"
               element={
                 <Update
@@ -185,7 +185,7 @@ const Auth = () => {
                   updateData={updateData}
                 />
               }
-            />
+            /> */}
           </Route>
         ) : null}
         <Route path="*" element={<Login/>}/>

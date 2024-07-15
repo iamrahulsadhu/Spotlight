@@ -13,7 +13,7 @@ const Home = ({table,data,accept}) => {
           <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
               <a className="navbar-brand" href="#">
-                Navbar
+                Spotlight-Admin
               </a>
               <button
                 className="navbar-toggler"
@@ -54,7 +54,7 @@ const Home = ({table,data,accept}) => {
         </header>
         <div className="container-fluid trainTable-mainContainer">
           <div className="train-heading">
-            <h5 className="mt-2">Train Table</h5>
+            <h5 className="mt-2">Request Table</h5>
           </div>
           <div className="tableContainer">
             <table>

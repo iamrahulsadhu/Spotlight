@@ -33,7 +33,7 @@ const Dashboard = () => {
       <header className="head">
           <nav className="navbar navbar-expand-lg">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">Navbar</a>
+    <a className="navbar-brand" href="#">Spotlight-Admin</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -95,7 +95,7 @@ justify-content-center">
 </svg>
             </div>
             <div className="box-content">
-              <span>Total Trains</span>
+              <span>Total Events</span>
               <h4 className="text-center mt-2">{totalTrains}</h4>
 
             </div>
